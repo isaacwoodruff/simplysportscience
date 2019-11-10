@@ -63,6 +63,60 @@ The goals of candidates on the website are to:
 ## Existing Features
 
 ## Features Left To Implement
+##### Home/Landing Page
+- Landing page which shows several sections:
+    - A search bar for finding jobs at the top
+    - A small selection of the jobs page with around 5 jobs and a button to Find More Listings which redirects to the jobs page
+    - A Call-To-Action for signing up to a newsletter and registering an account
+    - Some companies that the website lists jobs for
+    - A small selection of articles from the blog
+
+##### Job Search
+- The main component is the search feature for finding all jobs on the website with an option to:
+    - Filter by location, type of employment, or/and categories
+    - Save jobs to favourites list. If user hasn't got an account this leads to them signing up to use this feature
+    - Set alerts for a specific search parameter *e.g. biomechanist jobs in New York, US.*
+    - Apply for jobs without having registered an account. Their email can still be captured for newsletter
+- Call-To-Action for signing up to a newsletter and registering an account
+
+##### Employers Page
+- List reasons why employers would benefit from posting listings on the website
+- Access to candidate profile/CV database
+- Pricing packages for posting jobs
+- Sign up form
+
+##### Candidates Page
+- List reasons why candidates would benefit from signing up to an account, some are:
+    - Newsletter of newest jobs, and industry specific career advise
+    - Easy one click applications (by uploading CV or filling out profile on signup)
+    - Customized job alerts
+- Sign up form
+
+##### Blog
+- A blog with:
+    - Industry specific career advice
+    - Interviews with people in the industry
+    - Articles in the area of sport science
+    - Useful resources
+
+##### Employer Account Page
+- Dashboard for a logged in employer with:
+    - Help section on how to use the dashboard
+    - Option to post a job
+    - List of all job postings from employer
+    - Amount of times job post was clicked on next to each job post in the list
+    - Amount of times job post was applied to next to each job post in the list
+    - Option to click on profiles of candidates who applied (If they are registered on the website)
+    - View job package subscription and have option to repeat payment or upgrade
+
+##### Candidate Account Page
+- Dashboard for a logged in candidate with:
+    - Help section on how to use the dashboard
+    - Option to upload CV
+    - Option to fill out profile or autopopulate profile from CV
+    - Offer CV templates
+    - View list of favourite/saved jobs
+    - Links to career advise articles on the blog
 
 # Information Architecture
 
