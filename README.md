@@ -1,6 +1,8 @@
 # Simply Sport Science
 [Simply Sport Science](#https://simplysportscience.herokuapp.com/) was created as a job board to connect employers and candidates in the area of sport science.
 
+[![Build Status](https://travis-ci.org/isaacwoodruff/simplysportscience.svg?branch=master)](https://travis-ci.org/isaacwoodruff/simplysportscience)
+
 ## Table of Contents
 
 1. [UX](#ux)
