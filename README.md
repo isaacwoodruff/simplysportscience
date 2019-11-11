@@ -60,6 +60,13 @@ The goals of candidates on the website are to:
 ## Design Choices
 
 ## Wireframes
+The following wireframes were designed with Balsamiq.
+
+Desktop View
+- [Jobs Search Page](https://ibb.co/bvJbY9G)
+
+Mobile View
+- [Jobs Search Page](https://ibb.co/hdb58TG)
 
 # Features
 ## Existing Features
