@@ -1,9 +1,41 @@
 {% extends 'base.html' %} {% block content %}
 
 <div class="container">
-    <div class="row">
+    <div class="row justify-content-center">
         <h1>{{ page_title }}</h1>
     </div>
+
+    <div class="row justify-content-center">
+        <form>
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" placeholder="Job title" aria-label="job title"
+                    aria-describedby="job-title-input">
+                <input type="text" class="form-control" placeholder="Location" aria-label="location"
+                    aria-describedby="location-input">
+                <div class="input-group-append">
+                    <button class="btn btn-outline-secondary" type="submit">Search</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    {% if posts %}
+        {% for post in posts %}
+            <div class="row job-post">
+                <div class="col col-6">
+                    <p>{{ post.title }}</p>
+                    <p>{{ post.employer }}</p>
+                </div>
+                <div class="col col-4">
+                    <p>{{ post.location }} - {{ post.date_created }}</p>
+                </div>
+                <div class="col col-2">
+                    <button class="btn btn-outline-secondary" type="submit">Apply</button>
+                </div>
+            </div>
+        {% endfor %}
+    {% endif %}
+
 </div>
 
 {% endblock %}
