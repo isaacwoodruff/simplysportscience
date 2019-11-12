@@ -7,6 +7,7 @@ job_posts = [
         "description" : "Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum",
         "location" : "galway, ireland",
         "employer" : "pied piper",
+        "employment_type" : "full time",
         "date_created" : "1d"
     },
     {
@@ -14,6 +15,7 @@ job_posts = [
         "description" : "Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum",
         "location" : "galway, ireland",
         "employer" : "pied piper",
+        "employment_type" : "full time",
         "date_created" : "1d"
     },
     {
@@ -21,6 +23,7 @@ job_posts = [
         "description" : "Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum",
         "location" : "galway, ireland",
         "employer" : "pied piper",
+        "employment_type" : "full time",
         "date_created" : "1d"
     },
     {
@@ -28,6 +31,7 @@ job_posts = [
         "description" : "Lorem ipsum Lorem ipsum Lorem ipsum Lorem ipsum",
         "location" : "galway, ireland",
         "employer" : "pied piper",
+        "employment_type" : "full time",
         "date_created" : "1d"
     }
 ]

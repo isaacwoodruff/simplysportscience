@@ -3,3 +3,7 @@
     padding: 20px;
     border-radius: 5px;
 }
+
+.job-post p {
+    line-height: 10px;
+}
