@@ -2,4 +2,5 @@ from django.shortcuts import render
 from django.http import HttpResponse
 
 def jobs_view(request):
-    return HttpResponse("<h1>Jobs</h1>")
+    context = {"page_title": "Jobs"}
+    return render(request, "jobs.html", context)
