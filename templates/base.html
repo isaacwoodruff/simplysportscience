@@ -13,7 +13,7 @@
     <!-- custom css -->
     <link rel="stylesheet" href="{% static 'css/main.css' %}">
 
-    <title>{{ page_title }} | Simply Sport Science</title>
+    <title>{% if page_title %}{{ page_title }}{% else %}Join Today{% endif %} | Simply Sport Science</title>
 </head>
 
 <body>
@@ -31,13 +31,13 @@
                         <a class="nav-link" href="#">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Jobs</a>
+                        <a class="nav-link" href="{% url "jobs" %}">Jobs</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Employers</a>
+                        <a class="nav-link" href="{% url "register" title="employers" %}">Employers</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Candidates</a>
+                        <a class="nav-link" href="{% url "register" title="candidates" %}">Candidates</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Blog</a>
