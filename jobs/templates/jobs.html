@@ -1,44 +1,46 @@
 {% extends 'base.html' %} {% block content %}
 
-<div class="container">
-    <div class="row justify-content-center">
-        <h1>{{ page_title }}</h1>
-    </div>
 
-    <div class="row justify-content-center">
-        <form>
-            <div class="input-group mb-3">
-                <input type="text" class="form-control" placeholder="Job title" aria-label="job title"
-                    aria-describedby="job-title-input">
-                <input type="text" class="form-control" placeholder="Location" aria-label="location"
-                    aria-describedby="location-input">
-                <div class="input-group-append">
-                    <button class="btn btn-outline-secondary" type="submit">Search</button>
-                </div>
-            </div>
-        </form>
-    </div>
-
-    {% if posts %}
-        {% for post in posts %}
-            <div class="row job-post">
-                <div class="col col-12 col-sm-6 col-md-4 col-lg-6">
-                    <p>{{ post.title }}</p>
-                    <p>{{ post.employer }}</p>
-                    <div class="d-block d-md-none pt-3 pb-1">
-                            <p>{{ post.location }} - {{ post.date_created }}</p>
-                    </div>
-                </div>
-                <div class="col col-md-3 offset-md-1 col-lg-3 offset-lg-1 d-none d-md-block">
-                    <p>{{ post.location }} - {{ post.date_created }}</p>
-                </div>
-                <div class="col col-sm-3 offset-sm-3 col-md-3 offset-md-1 col-lg-2 offset-lg-0 d-none d-sm-block">
-                    <a class="btn btn-outline-secondary" type="button">{{ post.employment_type }}</a>
-                </div>
-            </div>
-        {% endfor %}
-    {% endif %}
-
+<div class="row justify-content-center">
+    <h1>{{ page_title }}</h1>
 </div>
+
+<div class="row justify-content-center">
+    <form>
+        <div class="input-group mb-3">
+            <input type="text" class="form-control" placeholder="Job title" aria-label="job title"
+                aria-describedby="job-title-input">
+            <input type="text" class="form-control" placeholder="Location" aria-label="location"
+                aria-describedby="location-input">
+            <div class="input-group-append">
+                <button class="btn btn-outline-secondary" type="submit">Search</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+{% if posts %}
+    {% for post in posts %}
+        <div class="row job-post">
+            <div class="col col-12 col-sm-6 col-md-4 col-lg-6 d-flex align-items-center">
+                <a href="#" class="text-dark">{{ post.title }}</a>
+            </div>
+            <div class="col col-md-3 offset-md-1 col-lg-3 offset-lg-1 d-none d-md-flex align-items-center">
+                <a href="#" class="text-muted">{{ post.location }} - {{ post.date_created }}</a>
+            </div>
+            <div class="col col-sm-3 offset-sm-3 col-md-3 offset-md-1 col-lg-2 offset-lg-0 d-none d-sm-flex align-items-center">
+                <button class="btn btn-outline-info" type="button">{{ post.employment_type }}</button>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <p><a href="#" class="text-danger">{{ post.employer }}</a></p>
+                    <a href="#" class="d-block d-md-none pt-3 pb-1 text-muted">{{ post.location }} - {{ post.date_created }}</a>
+                </div>
+        </div>
+        </div>
+        
+    {% endfor %}
+{% endif %}
+
 
 {% endblock %}

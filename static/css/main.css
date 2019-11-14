@@ -4,6 +4,6 @@
     border-radius: 5px;
 }
 
-.job-post p {
-    line-height: 10px;
+.job-post .row .col {
+    padding-left: 30px;
 }
