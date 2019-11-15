@@ -1,3 +1,5 @@
 from django.contrib import admin
+from .models import EmployerProfile, CandidateProfile
 
-# Register your models here.
+admin.site.register(EmployerProfile)
+admin.site.register(CandidateProfile)
