@@ -4,6 +4,7 @@ from django.contrib.auth.decorators import login_required
 from .forms import EmployerRegistrationForm, CandidateRegistrationForm, CandidateUpdateForm, EmployerUpdateForm, EmployerProfileUpdateForm
 from django.contrib.auth.models import User
 from django.core.exceptions import ObjectDoesNotExist
+from django.contrib.auth import authenticate, login
 
 
 def register_employer(request):
@@ -22,6 +23,11 @@ def register_employer(request):
 
             messages.success(
                 request, "Success! Your account has been created.")
+
+            new_user = authenticate(username=form.cleaned_data["email"],
+                                    password=form.cleaned_data['password1'],
+                                    )
+            login(request, new_user)
     else:
         form = EmployerRegistrationForm()
 
@@ -49,6 +55,11 @@ def register_candidate(request):
 
             messages.success(
                 request, "Success! Your account has been created.")
+
+            new_user = authenticate(username=form.cleaned_data["email"],
+                                    password=form.cleaned_data['password1'],
+                                    )
+            login(request, new_user)
     else:
         form = CandidateRegistrationForm()
 
