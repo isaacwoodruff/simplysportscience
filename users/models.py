@@ -6,6 +6,7 @@ from django.dispatch import receiver
 class EmployerProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     is_employer = models.BooleanField(default=True)
+    is_candidate = models.BooleanField(default=False)
     company_name = models.CharField(max_length=200)
 
     def __str__(self):
@@ -14,6 +15,7 @@ class EmployerProfile(models.Model):
 class CandidateProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     is_candidate = models.BooleanField(default=True)
+    is_employer = models.BooleanField(default=False)
     first_name = models.CharField(max_length=100)
     last_name = models.CharField(max_length=100)
 
