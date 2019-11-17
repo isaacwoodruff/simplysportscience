@@ -7,4 +7,4 @@ def jobs_view(request):
         "page_title" : "Jobs",
         "posts" : Job.objects.all(),
     }
-    return render(request, "jobs.html", context)
+    return render(request, "job-list.html", context)
