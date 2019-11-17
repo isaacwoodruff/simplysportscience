@@ -1,5 +1,4 @@
-from django.shortcuts import render
-from django.http import HttpResponse
+from django.shortcuts import render, get_object_or_404
 from .models import Job
 
 def job_list(request):
@@ -9,8 +8,8 @@ def job_list(request):
     }
     return render(request, "job-list.html", context)
 
-def job_details(request, job_pk):
-    job_post = Job.objects.get(pk=job_pk)
+def job_details(request, pk, slug):
+    job_post = get_object_or_404(Job, pk=pk)
 
     context = {
         "page_title" : job_post.title,
