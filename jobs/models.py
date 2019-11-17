@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils import timezone
+from django.urls import reverse
 
 class Job(models.Model):
     """
@@ -22,7 +23,8 @@ class Job(models.Model):
                                         choices=EMPLOYMENT_TYPE_CHOICES,
                                         default=FULL_TIME)
     title = models.CharField(max_length=200)
-    description = models.TextField()
+    description = models.TextField(default="")
+    requirements = models.TextField(default="")
     location = models.CharField(max_length=100)
     employer = models.CharField(max_length=200)
     views = models.IntegerField(default=0)
@@ -31,5 +33,10 @@ class Job(models.Model):
                                         null=True,
                                         default=timezone.now)
 
+    slug = models.SlugField(default="")
+
     def __str__(self):
         return self.title + " - " + self.employer
+
+    def get_absolute_url(self):
+        return reverse('job_details', kwargs={'pk': self.pk, 'slug': self.slug})
