@@ -25,7 +25,7 @@ class Job(models.Model):
                                         choices=EMPLOYMENT_TYPE_CHOICES,
                                         default=FULL_TIME)
 
-    user_fk = models.OneToOneField(EmployerProfile, on_delete=models.CASCADE)
+    employer_fk = models.ForeignKey(EmployerProfile, on_delete=models.CASCADE, null=True)
     title = models.CharField(max_length=200)
     description = models.TextField(default="")
     requirements = models.TextField(default="")
