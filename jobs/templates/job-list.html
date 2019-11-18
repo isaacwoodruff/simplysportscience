@@ -33,7 +33,7 @@
             </div>
             <div class="row">
                 <div class="col">
-                    <p><a href="#" class="text-danger">{{ post.employer }}</a></p>
+                    <p><a href="{{ post.employer_fk.get_absolute_url }}" class="text-danger">{{ post.employer }}</a></p>
                     <a href="#" class="d-block d-md-none pt-3 pb-1 text-muted">{{ post.location }} - {{ post.date_created }}</a>
                 </div>
         </div>
