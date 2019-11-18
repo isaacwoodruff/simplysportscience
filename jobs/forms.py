@@ -7,8 +7,10 @@ class JobPostForm(forms.ModelForm):
     description = forms.CharField(widget=forms.Textarea)
     requirements = forms.CharField(widget=forms.Textarea)
     location = forms.CharField(max_length=100, required=True)
-    employer = forms.CharField(default="test_company")
-    slug = forms.SlugField(default="")
+    employer = forms.CharField(required=False)
+    slug = forms.SlugField(required=False)
+
+    employer.widget = employer.hidden_widget()
     slug.widget = slug.hidden_widget()
 
     class Meta:
