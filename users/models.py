@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+from django.urls import reverse
 
 class EmployerProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
@@ -9,8 +10,13 @@ class EmployerProfile(models.Model):
     is_candidate = models.BooleanField(default=False)
     company_name = models.CharField(max_length=200)
 
+    slug = models.SlugField(default="test")
+
     def __str__(self):
         return f"{self.company_name} Profile"
+
+    def get_absolute_url(self):
+        return reverse('employer_job_list', kwargs={'pk': self.pk, 'slug': self.slug})
 
 class CandidateProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
