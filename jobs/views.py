@@ -1,5 +1,8 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, redirect, get_object_or_404
+from django.template.defaultfilters import slugify
+from django.contrib import messages
 from .models import Job
+from .forms import JobPostForm
 
 def job_list(request):
     context = {
@@ -16,3 +19,29 @@ def job_details(request, pk, slug):
         "post" : job_post,
     }
     return render(request, "job-details.html", context)
+
+def new_job(request):
+    if request.method == "POST":
+        form = JobPostForm(request.POST)
+        if form.is_valid():
+            form_obj = form.save(commit=False)
+
+            employer_user = request.user.employerprofile
+            form_obj.employer = employer_user.company_name
+
+            form_obj.slug = slugify(form.cleaned_data.get("title"))
+            form_obj.save()
+
+            messages.success(
+                request, "Success! Your new job post has been created.")
+
+            new_job_object = Job.objects.get(pk=form_obj.pk)
+            return redirect(new_job_object)
+    else:
+        form = JobPostForm()
+
+    context = {
+        "page_title" : "Create a new job",
+        "new_job_form" : form
+    }
+    return render(request, "new-job.html", context)
