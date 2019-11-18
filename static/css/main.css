@@ -6,3 +6,7 @@
 .job-post .row .col {
     padding-left: 30px;
 }
+
+.job-post button {
+    min-width: 6rem;
+}
