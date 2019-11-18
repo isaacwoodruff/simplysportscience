@@ -1,6 +1,8 @@
 from django.db import models
 from django.utils import timezone
 from django.urls import reverse
+from users.models import EmployerProfile
+
 
 class Job(models.Model):
     """
@@ -22,6 +24,8 @@ class Job(models.Model):
     employment_type = models.CharField(max_length=50,
                                         choices=EMPLOYMENT_TYPE_CHOICES,
                                         default=FULL_TIME)
+
+    user_fk = models.OneToOneField(EmployerProfile, on_delete=models.CASCADE)
     title = models.CharField(max_length=200)
     description = models.TextField(default="")
     requirements = models.TextField(default="")
@@ -30,8 +34,8 @@ class Job(models.Model):
     views = models.IntegerField(default=0)
     created_date = models.DateTimeField(auto_now_add=True)
     published_date = models.DateTimeField(blank=True,
-                                        null=True,
-                                        default=timezone.now)
+                                          null=True,
+                                          default=timezone.now)
 
     slug = models.SlugField(default="")
 
