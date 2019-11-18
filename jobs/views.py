@@ -1,32 +1,45 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.template.defaultfilters import slugify
 from django.contrib import messages
-from .models import Job
+from .models import Job, EmployerProfile
 from .forms import JobPostForm
+
 
 def job_list(request):
     context = {
-        "page_title" : "Jobs",
-        "posts" : Job.objects.all(),
+        "page_title": "Jobs",
+        "posts": Job.objects.all(),
     }
     return render(request, "job-list.html", context)
 
-def job_details(request, pk, slug):
+
+def job_details(request, pk, slug=""):
     job_post = get_object_or_404(Job, pk=pk)
 
     context = {
-        "page_title" : job_post.title,
-        "post" : job_post,
+        "page_title": job_post.title,
+        "post": job_post,
     }
     return render(request, "job-details.html", context)
+
+
+def employer_job_list(request, pk, slug=""):
+    employer_object = get_object_or_404(EmployerProfile, pk=pk)
+
+    context = {
+        "page_title": employer_object.company_name + " " + "Jobs",
+        "posts": Job.objects.filter(employer_fk=employer_object),
+    }
+    return render(request, "job-list.html", context)
+
 
 def new_job(request):
     if request.method == "POST":
         form = JobPostForm(request.POST)
         if form.is_valid():
             form_obj = form.save(commit=False)
-
             employer_user = request.user.employerprofile
+            form_obj.employer_fk = employer_user
             form_obj.employer = employer_user.company_name
 
             form_obj.slug = slugify(form.cleaned_data.get("title"))
@@ -41,7 +54,7 @@ def new_job(request):
         form = JobPostForm()
 
     context = {
-        "page_title" : "Create a new job",
-        "new_job_form" : form
+        "page_title": "Create a new job",
+        "new_job_form": form
     }
     return render(request, "new-job.html", context)
