@@ -13,19 +13,24 @@
     <!-- custom css -->
     <link rel="stylesheet" href="{% static 'css/main.css' %}">
 
-    <title>{% if page_title %}{{ page_title }}{% else %}Join Today{% endif %} | Simply Sport Science</title>
+    <title>{% if page_title %}
+        {{ page_title }} | Simply Sport Science
+        {% else %}
+        Simply Sport Science
+        {% endif %}</title>
 </head>
 
 <body>
     <nav class="navbar navbar-expand-md navbar-dark bg-dark static-top">
         <div class="container">
             <a class="navbar-brand" href="#">Simply Sport Science</a>
-            
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+                aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
 
-            <div class="collapse navbar-collapse"  id="navbarResponsive">
+            <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
                         <a class="nav-link" href="#">Home</a>
@@ -42,21 +47,33 @@
                     <li class="nav-item">
                         <a class="nav-link" href="#">Blog</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url "login" %}">Login</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url "register" %}">Register</a>
-                    </li>
+                    {% if request.user.is_authenticated %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+                        </li>
+                        {% if request.user.employerprofile %}
+                            <li class="nav-item btn btn-outline-info post-job-link">
+                                <a class="nav-link" href="{% url 'new_job' %}">Post Job</a>
+                            </li>
+                        {% elif request.user.candidateprofile %}
+                        {% endif %}
+                    {% else %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'login' %}">Login</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'register' %}">Register</a>
+                        </li>
+                    {% endif %}
                 </ul>
             </div>
         </div>
     </nav>
     <div class="container my-5">
         {% if messages %}
-            {% for message in messages %}
-                <p class="alert alert-{{ message.tags }}">{{ message }}</p>
-            {% endfor %}
+        {% for message in messages %}
+        <p class="alert alert-{{ message.tags }}">{{ message }}</p>
+        {% endfor %}
         {% endif %}
         {% block content %} {% endblock %}
     </div>
@@ -65,7 +82,7 @@
     </footer>
     <!-- jquery javascript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    
+
     <!-- bootstrap javascript -->
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
 
