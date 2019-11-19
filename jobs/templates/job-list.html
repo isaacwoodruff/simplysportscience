@@ -1,46 +1,60 @@
 {% extends 'base.html' %} {% block content %}
 
 
-<div class="row justify-content-center">
+<div class="row justify-content-center mb-4">
     <h1>{{ page_title }}</h1>
 </div>
 
 <div class="row justify-content-center">
-    <form>
-        <div class="input-group mb-3">
-            <input type="text" class="form-control" placeholder="Job title" aria-label="job title"
-                aria-describedby="job-title-input">
-            <input type="text" class="form-control" placeholder="Location" aria-label="location"
-                aria-describedby="location-input">
-            <div class="input-group-append">
-                <button class="btn btn-outline-secondary" type="submit">Search</button>
+    <div class="col col-12 justify-content-center">
+        <form>
+            <div class="input-group justify-content-center mb-3 d-block d-md-flex">
+                <div class="input-group-prepend mr-md-3 d-block d-md-flex">
+                    <h5 class="d-md-none">Job title, keywords, or company</h5>
+                    <input type="text" class="form-control" placeholder="Job title" aria-label="job title"
+                        aria-describedby="job-title-input" />
+                </div>
+                <h5 class="d-md-none mt-3 mt-md-0">City, region, or country</h5>
+                <input class="form-control" type="search" id="address-input" placeholder="Location" />
+                <div class="input-group-append mt-4 mt-md-0 ml-md-3">
+                    <button class="btn btn-outline-secondary rounded btn-search" type="submit">Search</button>
+                </div>
             </div>
-        </div>
-    </form>
+        </form>
+    </div>
 </div>
 
 {% if posts %}
-    {% for post in posts %}
-        <div class="row job-post">
-            <div class="col col-5 col-sm-6 col-md-4 col-lg-6 d-flex align-items-center">
-                <a href="{{ post.get_absolute_url }}" class="text-dark">{{ post.title }}</a>
-            </div>
-            <div class="col col-md-3 offset-md-1 col-lg-3 offset-lg-1 d-none d-md-flex align-items-center">
-                <a href="#" class="text-muted">{{ post.location }} - {{ post.date_created }}</a>
-            </div>
-            <div class="col col-5 offset-2 col-sm-3 offset-sm-3 col-md-3 offset-md-1 col-lg-2 offset-lg-0 d-sm-flex align-items-center">
-                <button class="btn btn-outline-info" type="button">{{ post.employment_type }}</button>
-            </div>
-            <div class="row">
-                <div class="col">
-                    <p><a href="{{ post.employer_fk.get_absolute_url }}" class="text-danger">{{ post.employer }}</a></p>
-                    <a href="#" class="d-block d-md-none pt-3 pb-1 text-muted">{{ post.location }} - {{ post.date_created }}</a>
-                </div>
+{% for post in posts %}
+<div class="row job-post">
+    <div class="col col-5 col-sm-6 col-md-4 col-lg-6 d-flex align-items-center">
+        <a href="{{ post.get_absolute_url }}" class="text-dark">{{ post.title }}</a>
+    </div>
+    <div class="col col-md-3 offset-md-1 col-lg-3 offset-lg-1 d-none d-md-flex align-items-center">
+        <a href="#" class="text-muted">{{ post.location }} - {{ post.date_created }}</a>
+    </div>
+    <div
+        class="col col-5 offset-2 col-sm-3 offset-sm-3 col-md-3 offset-md-1 col-lg-2 offset-lg-0 d-sm-flex align-items-center">
+        <button class="btn btn-outline-info" type="button">{{ post.employment_type }}</button>
+    </div>
+    <div class="row">
+        <div class="col">
+            <p><a href="{{ post.employer_fk.get_absolute_url }}" class="text-danger">{{ post.employer }}</a></p>
+            <a href="#" class="d-block d-md-none pt-3 pb-1 text-muted">{{ post.location }} - {{ post.date_created }}</a>
         </div>
-        </div>
-        
-    {% endfor %}
+    </div>
+</div>
+
+{% endfor %}
 {% endif %}
 
-
+<!-- algolia location search scripts -->
+<script src="https://cdn.jsdelivr.net/npm/places.js@1.17.0"></script>
+<script>
+    var placesAutocomplete = places({
+        appId: 'plIV84ON3Z5G',
+        apiKey: '75a6ea775a72efbcd592c923473e9d2d',
+        container: document.querySelector('#address-input')
+    });
+</script>
 {% endblock %}

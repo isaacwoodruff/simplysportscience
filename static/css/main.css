@@ -10,3 +10,17 @@
 .job-post button {
     min-width: 6rem;
 }
+
+.algolia-places {
+    width: auto;
+}
+
+@media (max-width: 768px) {
+    .btn-search {
+        width: 100%;
+    }
+
+    .algolia-places {
+        width: 100%;
+    }
+}
