@@ -10,6 +10,7 @@ class JobPostForm(forms.ModelForm):
     employer = forms.CharField(required=False)
     slug = forms.SlugField(required=False)
 
+    location.widget = forms.TextInput(attrs={'id': "address-input", 'placeholder': 'Please select from list'})
     employer.widget = employer.hidden_widget()
     slug.widget = slug.hidden_widget()
 
