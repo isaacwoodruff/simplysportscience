@@ -1,3 +1,12 @@
+.post-job-link {
+    border-radius: 20px;
+    padding: 0;
+}
+
+.navbar-dark .navbar-nav .post-job-link a {
+    color: #1b95a9;
+}
+
 .job-post {
     box-shadow: 0 2px 2px -2px #807f7f;
     padding: 20px;
