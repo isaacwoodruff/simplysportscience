@@ -2,20 +2,20 @@
 
 
 <div class="row justify-content-center mb-4">
-    <h1>{{ page_title }}</h1>
+    <h3>{{ page_title }}</h3>
 </div>
 
 <div class="row justify-content-center">
     <div class="col col-12 justify-content-center">
-        <form>
+        <form id=”search” action="{% url 'search_results' %}" method="GET">
             <div class="input-group justify-content-center mb-3 d-block d-md-flex">
                 <div class="input-group-prepend mr-md-3 d-block d-md-flex">
                     <h5 class="d-md-none">Job title, keywords, or company</h5>
                     <input type="text" class="form-control" placeholder="Job title" aria-label="job title"
-                        aria-describedby="job-title-input" />
+                        aria-describedby="job-title-input" id="job-title" name="job-title" />
                 </div>
                 <h5 class="d-md-none mt-3 mt-md-0">City, region, or country</h5>
-                <input class="form-control" type="search" id="address-input" placeholder="Location" />
+                <input class="form-control" type="search" id="address-input" placeholder="Location" name="location" />
                 <div class="input-group-append mt-4 mt-md-0 ml-md-3">
                     <button class="btn btn-outline-secondary rounded btn-search" type="submit">Search</button>
                 </div>
@@ -47,6 +47,9 @@
 
 {% endfor %}
 {% endif %}
+{% endblock %}
+
+{% block javascript %}
 
 <!-- algolia location search scripts -->
 <script src="https://cdn.jsdelivr.net/npm/places.js@1.17.0"></script>
@@ -55,6 +58,21 @@
         appId: '{{ ALGOLIA_PUBLIC_APP_ID }}',
         apiKey: '{{ ALGOLIA_PUBLIC_KEY }}',
         container: document.querySelector('#address-input')
+    });
+</script>
+
+<!-- jQuery autocomplete scripts/stylesheets -->
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" type="text/css"
+    media="all" />
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"
+    integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
+<script>
+    $(function() {
+        $("#job-title").autocomplete({
+            source: "{% url 'autocomplete_title_search' %}",
+            minLength: 1,
+            delay: 100,
+        });
     });
 </script>
 {% endblock %}

@@ -48,22 +48,22 @@
                         <a class="nav-link" href="#">Blog</a>
                     </li>
                     {% if request.user.is_authenticated %}
-                        <li class="nav-item">
-                            <a class="nav-link" href="{% url 'logout' %}">Logout</a>
-                        </li>
-                        {% if request.user.employerprofile %}
-                            <li class="nav-item btn btn-outline-info post-job-link">
-                                <a class="nav-link" href="{% url 'new_job' %}">Post Job</a>
-                            </li>
-                        {% elif request.user.candidateprofile %}
-                        {% endif %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+                    </li>
+                    {% if request.user.employerprofile %}
+                    <li class="nav-item btn btn-outline-info post-job-link">
+                        <a class="nav-link" href="{% url 'new_job' %}">Post Job</a>
+                    </li>
+                    {% elif request.user.candidateprofile %}
+                    {% endif %}
                     {% else %}
-                        <li class="nav-item">
-                            <a class="nav-link" href="{% url 'login' %}">Login</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{% url 'register' %}">Register</a>
-                        </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'login' %}">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'register' %}">Register</a>
+                    </li>
                     {% endif %}
                 </ul>
             </div>
@@ -86,6 +86,7 @@
     <!-- bootstrap javascript -->
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
 
+    {% block javascript %} {% endblock %}
 </body>
 
 </html>
