@@ -1,3 +1,4 @@
+import os
 from django.shortcuts import render, redirect, get_object_or_404
 from django.template.defaultfilters import slugify
 from django.contrib import messages
@@ -9,6 +10,8 @@ def job_list(request):
     context = {
         "page_title": "Jobs",
         "posts": Job.objects.all(),
+        "ALGOLIA_PUBLIC_KEY": os.environ.get('ALGOLIA_PUBLIC_KEY'),
+        "ALGOLIA_PUBLIC_APP_ID": os.environ.get('ALGOLIA_PUBLIC_APP_ID'),
     }
     return render(request, "job-list.html", context)
 
@@ -55,6 +58,8 @@ def new_job(request):
 
     context = {
         "page_title": "Create a new job",
-        "new_job_form": form
+        "new_job_form": form,
+        "ALGOLIA_PUBLIC_KEY": os.environ.get('ALGOLIA_PUBLIC_KEY'),
+        "ALGOLIA_PUBLIC_APP_ID": os.environ.get('ALGOLIA_PUBLIC_APP_ID'),
     }
     return render(request, "new-job.html", context)

@@ -16,8 +16,8 @@
 <script src="https://cdn.jsdelivr.net/npm/places.js@1.17.0"></script>
 <script>
     var placesAutocomplete = places({
-        appId: 'plIV84ON3Z5G',
-        apiKey: '75a6ea775a72efbcd592c923473e9d2d',
+        appId: '{{ ALGOLIA_PUBLIC_APP_ID }}',
+        apiKey: '{{ ALGOLIA_PUBLIC_KEY }}',
         container: document.querySelector('#address-input')
     });
 </script>
