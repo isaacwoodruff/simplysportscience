@@ -2,18 +2,8 @@ import os
 from django.shortcuts import render, redirect, get_object_or_404
 from django.template.defaultfilters import slugify
 from django.contrib import messages
-from .models import Job, EmployerProfile
+from .models import Job
 from .forms import JobPostForm
-
-
-def job_list(request):
-    context = {
-        "page_title": "Jobs",
-        "posts": Job.objects.all(),
-        "ALGOLIA_PUBLIC_KEY": os.environ.get('ALGOLIA_PUBLIC_KEY'),
-        "ALGOLIA_PUBLIC_APP_ID": os.environ.get('ALGOLIA_PUBLIC_APP_ID'),
-    }
-    return render(request, "job-list.html", context)
 
 
 def job_details(request, pk, slug=""):
@@ -24,16 +14,6 @@ def job_details(request, pk, slug=""):
         "post": job_post,
     }
     return render(request, "job-details.html", context)
-
-
-def employer_job_list(request, pk, slug=""):
-    employer_object = get_object_or_404(EmployerProfile, pk=pk)
-
-    context = {
-        "page_title": employer_object.company_name + " " + "Jobs",
-        "posts": Job.objects.filter(employer_fk=employer_object),
-    }
-    return render(request, "job-list.html", context)
 
 
 def new_job(request):
