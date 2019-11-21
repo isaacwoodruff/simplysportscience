@@ -45,7 +45,7 @@
     </div>
     <div
         class="col col-5 offset-2 col-sm-3 offset-sm-3 col-md-3 offset-md-1 col-lg-2 offset-lg-0 d-sm-flex align-items-center">
-        <button class="btn btn-outline-info" type="button">{{ post.employment_type }}</button>
+        <a href="{% url 'employment_type_job_list' %}?type={{ post.employment_type }}" class="btn btn-outline-info">{{ post.employment_type }}</a>
     </div>
     <div class="row">
         <div class="col">
