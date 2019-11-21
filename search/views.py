@@ -1,8 +1,11 @@
 import os
 import json
+import operator
+from functools import reduce
 from django.shortcuts import render, get_object_or_404, HttpResponse
 from django.db.models import Q
 from jobs.models import Job, EmployerProfile
+
 
 def job_list(request):
     algolia_key = os.environ.get('ALGOLIA_PUBLIC_KEY')
@@ -15,6 +18,7 @@ def job_list(request):
         "ALGOLIA_PUBLIC_APP_ID": algolia_app_id,
     }
     return render(request, "job-list.html", context)
+
 
 def employer_job_list(request, pk, slug=""):
     employer_object = get_object_or_404(EmployerProfile, pk=pk)
@@ -32,6 +36,7 @@ def employer_job_list(request, pk, slug=""):
     }
     return render(request, "job-list.html", context)
 
+
 def autocomplete_title_search(request):
     if request.is_ajax():
         job_query = request.GET.get('term', '')
@@ -46,12 +51,21 @@ def autocomplete_title_search(request):
         mimetype = 'application/json'
     return HttpResponse(data, mimetype)
 
+
 def search_results(request):
     job_query = request.GET.get('job-title')
     location_query = request.GET.get('location')
-    posts = Job.objects.filter(
-        title__icontains=job_query, location__icontains=location_query
-    )
+    employment_type_query = request.GET.getlist('employment-type')
+    query_list = []
+
+    if job_query != "":
+        query_list.append(Q(title__icontains=job_query))
+    if location_query != "":
+        query_list.append(Q(location__icontains=location_query))
+    if employment_type_query != []:
+        query_list.append(Q(employment_type__in=employment_type_query))
+
+    posts = Job.objects.filter(reduce(operator.and_, (query for query in query_list)))
 
     if location_query != "":
         page_title = job_query.title() + " Jobs in " + location_query.title()
