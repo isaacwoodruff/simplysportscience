@@ -24,12 +24,21 @@
     width: auto;
 }
 
+.bootstrap-select {
+    max-width: 80px;
+}
+
 @media (max-width: 768px) {
     .btn-search {
         width: 100%;
     }
 
     .input-group .algolia-places {
+        width: 100%;
+    }
+
+    .input-group-append .bootstrap-select:not([class*="col-"]):not([class*="form-control"]):not(.input-group-btn) {
+        max-width: 100%;
         width: 100%;
     }
 }
