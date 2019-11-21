@@ -65,12 +65,15 @@ def search_results(request):
     if employment_type_query != []:
         query_list.append(Q(employment_type__in=employment_type_query))
 
-    posts = Job.objects.filter(reduce(operator.and_, (query for query in query_list)))
+    if query_list != []:
+        posts = Job.objects.filter(reduce(operator.and_, (query for query in query_list)))
+    else:
+        posts = Job.objects.all()
 
     if location_query != "":
         page_title = job_query.title() + " Jobs in " + location_query.title()
     else:
-        page_title = job_query.title() + " Jobs Everywhere"
+        page_title = job_query.title() + " Jobs Anywhere"
 
     algolia_key = os.environ.get('ALGOLIA_PUBLIC_KEY')
     algolia_app_id = os.environ.get('ALGOLIA_PUBLIC_APP_ID')
