@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from .forms import EmployerRegistrationForm, CandidateRegistrationForm, CandidateUpdateForm, EmployerUpdateForm, EmployerProfileUpdateForm
+from users import forms as user_forms
 from django.contrib.auth.models import User
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth import authenticate, login
@@ -15,7 +15,7 @@ def register_choice(request):
 
 def register_employer(request):
     if request.method == "POST":
-        form = EmployerRegistrationForm(request.POST)
+        form = user_forms.EmployerRegistrationForm(request.POST)
         if form.is_valid():
             form_obj = form.save(commit=False)
             form_obj.username = form.cleaned_data.get("email")
@@ -35,7 +35,7 @@ def register_employer(request):
                                     )
             login(request, new_user)
     else:
-        form = EmployerRegistrationForm()
+        form = user_forms.EmployerRegistrationForm()
 
     context = {
         "form": form,
@@ -46,7 +46,7 @@ def register_employer(request):
 
 def register_candidate(request):
     if request.method == "POST":
-        form = CandidateRegistrationForm(request.POST)
+        form = user_forms.CandidateRegistrationForm(request.POST)
         if form.is_valid():
             form_obj = form.save(commit=False)
             form_obj.username = form.cleaned_data.get("email")
@@ -67,7 +67,7 @@ def register_candidate(request):
                                     )
             login(request, new_user)
     else:
-        form = CandidateRegistrationForm()
+        form = user_forms.CandidateRegistrationForm()
 
     context = {
         "form": form,
@@ -75,6 +75,28 @@ def register_candidate(request):
     }
     return render(request, "register.html", context)
 
+
+def login_view(request):
+    if request.method == "POST":
+        form = user_forms.LoginForm(request.POST)
+        if form.is_valid():
+            user = authenticate(username=form.cleaned_data["email"],
+                                    password=form.cleaned_data['password'],
+                                )
+            if user:
+                login(request, user)
+                messages.success(request, "You have logged in successfully!")
+                redirect(logged_user_type)
+            else:
+                messages.warning(request, "Your password/email is incorrect")
+    else:
+        form = user_forms.LoginForm()
+
+    context = {
+        "form": form,
+        "page_title": "Log In",
+    }
+    return render(request, "login.html", context)
 
 def logged_user_type(request):
     try:
@@ -89,8 +111,8 @@ def logged_user_type(request):
 
 @login_required
 def employer_profile(request):
-    update_form = EmployerUpdateForm()
-    profile_form = EmployerProfileUpdateForm()
+    update_form = user_forms.EmployerUpdateForm()
+    profile_form = user_forms.EmployerProfileUpdateForm()
 
     context = {
         "update_form": update_form,
@@ -101,7 +123,7 @@ def employer_profile(request):
 
 @login_required
 def candidate_profile(request):
-    update_form = CandidateUpdateForm()
+    update_form = user_forms.CandidateUpdateForm()
 
     context = {
         "update_form": update_form,
