@@ -2,7 +2,9 @@
 {% load static %}
 
 <div class="row justify-content-center mb-4">
-    <h3>{{ page_title }}</h3>
+    <div class="col col-12 text-center">
+        <h3>{{ page_title }}</h3>
+    </div>
 </div>
 
 <div class="row justify-content-center">
@@ -26,7 +28,7 @@
                         <option value="Volunteer">Volunteer</option>
                     </select>
                 </div>
-                <div class="input-group-append mt-4 mt-md-0 ml-md-3">
+                <div class="input-group-append mt-4 mt-md-0 ml-md-3 justify-content-center">
                     <button class="btn btn-outline-secondary rounded" type="submit">Search</button>
                 </div>
             </div>
@@ -50,7 +52,7 @@
     <div class="row">
         <div class="col">
             <p><a href="{{ post.employer_fk.get_absolute_url }}" class="text-danger">{{ post.employer }}</a></p>
-            <a href="#" class="d-block d-md-none pt-3 pb-1 text-muted">{{ post.location }} - {{ post.date_created }}</a>
+            <a href="{% url 'location_job_list' %}?in={{ post.location }}" class="d-block d-md-none pt-3 pb-1 text-muted">{{ post.location }}</a>
         </div>
     </div>
 </div>

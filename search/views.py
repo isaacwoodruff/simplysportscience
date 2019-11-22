@@ -53,6 +53,22 @@ def employment_type_job_list(request):
     return render(request, "job-list.html", context)
 
 
+def location_job_list(request):
+    location = request.GET['in']
+    page_title = "Jobs in " +  location
+    algolia_key = os.environ.get('ALGOLIA_PUBLIC_KEY')
+    algolia_app_id = os.environ.get('ALGOLIA_PUBLIC_APP_ID')
+    posts = Job.objects.filter(location__icontains=location)
+
+    context = {
+        "page_title": page_title,
+        "posts": posts,
+        "ALGOLIA_PUBLIC_KEY": algolia_key,
+        "ALGOLIA_PUBLIC_APP_ID": algolia_app_id,
+    }
+    return render(request, "job-list.html", context)
+
+
 def autocomplete_title_search(request):
     if request.is_ajax():
         job_query = request.GET.get('term', '')
