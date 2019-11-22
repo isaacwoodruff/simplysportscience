@@ -2,6 +2,7 @@ import os
 from django.shortcuts import render, redirect, get_object_or_404
 from django.template.defaultfilters import slugify
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 from .models import Job
 from .forms import JobPostForm
 
@@ -16,6 +17,7 @@ def job_details(request, pk, slug=""):
     return render(request, "job-details.html", context)
 
 
+@login_required
 def new_job(request):
     if request.method == "POST":
         form = JobPostForm(request.POST)
