@@ -12,7 +12,7 @@ def job_list(request):
     algolia_app_id = os.environ.get('ALGOLIA_PUBLIC_APP_ID')
 
     context = {
-        "page_title": "Jobs",
+        "page_title": "Explore thousands of Jobs",
         "posts": Job.objects.all(),
         "ALGOLIA_PUBLIC_KEY": algolia_key,
         "ALGOLIA_PUBLIC_APP_ID": algolia_app_id,
