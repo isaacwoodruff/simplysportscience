@@ -21,7 +21,7 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-md navbar-dark static-top">
+    <nav class="navbar navbar-expand-md navbar-dark bg-info static-top">
         <div class="container">
             <a class="navbar-brand" href="#">Simply Sport Science</a>
 
@@ -69,11 +69,14 @@
             </div>
         </div>
     </nav>
+    
+    {% block banner %}{% endblock %}
+
     <div class="container my-5">
         {% if messages %}
-        {% for message in messages %}
-        <p class="alert alert-{{ message.tags }}">{{ message }}</p>
-        {% endfor %}
+            {% for message in messages %}
+                <p class="alert alert-{{ message.tags }}">{{ message }}</p>
+            {% endfor %}
         {% endif %}
         {% block content %} {% endblock %}
     </div>
