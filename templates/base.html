@@ -21,55 +21,55 @@
 </head>
 
 <body class="{% block body_class %}{% endblock %}">
-    <nav class="navbar navbar-expand-md navbar-dark static-top">
-        <div class="container">
-            <a class="navbar-brand" href="#">Simply Sport Science</a>
+    <div id="{% block job_wrapper_id %}{% endblock %}">
+        <nav class="navbar navbar-expand-md navbar-dark static-top">
+            <div class="container">
+                <a class="navbar-brand" href="#">Simply Sport Science</a>
 
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
-                aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+                    aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
 
-            <div class="collapse navbar-collapse" id="navbarResponsive">
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'jobs' %}">Jobs</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'register_employer' %}">Employers</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'register_candidate' %}">Candidates</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Blog</a>
-                    </li>
-                    {% if request.user.is_authenticated %}
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'logout' %}">Logout</a>
-                    </li>
-                    {% if request.user.employerprofile %}
-                    <li class="nav-item btn btn-outline-info post-job-link">
-                        <a class="nav-link" href="{% url 'new_job' %}">Post Job</a>
-                    </li>
-                    {% elif request.user.candidateprofile %}
-                    {% endif %}
-                    {% else %}
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'login' %}">Sign In</a>
-                    </li>
-                    {% endif %}
-                </ul>
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'jobs' %}">Jobs</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'register_employer' %}">Employers</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'register_candidate' %}">Candidates</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Blog</a>
+                        </li>
+                        {% if request.user.is_authenticated %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+                        </li>
+                        {% if request.user.employerprofile %}
+                        <li class="nav-item btn btn-outline-info post-job-link">
+                            <a class="nav-link" href="{% url 'new_job' %}">Post Job</a>
+                        </li>
+                        {% elif request.user.candidateprofile %}
+                        {% endif %}
+                        {% else %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'login' %}">Sign In</a>
+                        </li>
+                        {% endif %}
+                    </ul>
+                </div>
             </div>
-        </div>
-    </nav>
+        </nav>
     
-    <div id="{% block wrapper_class %}{% endblock %}">
         {% block banner %}{% endblock %}
-
+    </div>  
         <div class="container my-5">
             {% if messages %}
                 {% for message in messages %}
@@ -78,7 +78,6 @@
             {% endif %}
             {% block content %} {% endblock %}
         </div>
-    </div>  
     <footer>
 
     </footer>
