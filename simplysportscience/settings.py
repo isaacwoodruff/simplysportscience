@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'jobs',
     'search',
     'users',
+    'checkout',
 ]
 
 MIDDLEWARE = [
@@ -137,5 +138,8 @@ STATICFILES_DIRS = (
 
 CRISPY_TEMPLATE_PACK = "bootstrap4"
 
-LOGIN_REDIRECT_URL = 'logged_user_type'
-LOGIN_URL = 'login'
+LOGIN_REDIRECT_URL = "logged_user_type"
+LOGIN_URL = "login"
+
+STRIPE_PUBLISHABLE = os.environ.get("STRIPE_PUBLISHABLE")
+STRIPE_SECRET = os.environ.get("STRIPE_SECRET")
