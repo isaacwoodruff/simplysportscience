@@ -1,3 +1,14 @@
+.sign-in-bg {
+    background-image: url("https://i.ibb.co/D8V02Ls/coffee-work-table-phone.jpg");
+    background-size: auto;
+    background-repeat: no-repeat;
+    background-position: top;
+}
+
+.navbar {
+    z-index: 1;
+}
+
 .navbar-dark .navbar-nav .nav-link {
     color: #FFF;
 }
@@ -22,13 +33,18 @@
     color: #000;
 }
 
+#banner-container-wrapper {
+    position: relative;
+    top: -60px;
+}
+
 #job-list-banner {
     background-image: url("https://i.ibb.co/cwL3K5W/jobs-banner.jpg");
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
     background-color: #cccccc;
-    min-height: 350px;
+    min-height: 455px;
 }
 
 .job-post {
@@ -51,6 +67,11 @@
 
 .bootstrap-select {
     max-width: 80px;
+}
+
+.sign-in {
+    background:#FFF;
+    border-radius: 10px;
 }
 
 @media (max-width: 768px) {
