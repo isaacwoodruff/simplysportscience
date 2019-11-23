@@ -7,15 +7,15 @@ from django.db.models import Q
 from jobs.models import Job, EmployerProfile
 
 
-def job_list(request):
-    algolia_key = os.environ.get('ALGOLIA_PUBLIC_KEY')
-    algolia_app_id = os.environ.get('ALGOLIA_PUBLIC_APP_ID')
+ALGOLIA_PUBLIC_KEY = os.environ.get('ALGOLIA_PUBLIC_KEY')
+ALGOLIA_PUBLIC_APP_ID = os.environ.get('ALGOLIA_PUBLIC_APP_ID')
 
+def job_list(request):
     context = {
         "page_title": "Explore thousands of Jobs",
         "posts": Job.objects.all(),
-        "ALGOLIA_PUBLIC_KEY": algolia_key,
-        "ALGOLIA_PUBLIC_APP_ID": algolia_app_id,
+        "ALGOLIA_PUBLIC_KEY": ALGOLIA_PUBLIC_KEY,
+        "ALGOLIA_PUBLIC_APP_ID": ALGOLIA_PUBLIC_APP_ID,
     }
     return render(request, "job-list.html", context)
 
@@ -25,14 +25,12 @@ def employer_job_list(request, pk, slug=""):
 
     page_title = employer_object.company_name + " " + "Jobs"
     posts = Job.objects.filter(employer_fk=employer_object)
-    algolia_key = os.environ.get('ALGOLIA_PUBLIC_KEY')
-    algolia_app_id = os.environ.get('ALGOLIA_PUBLIC_APP_ID')
 
     context = {
         "page_title": page_title,
         "posts": posts,
-        "ALGOLIA_PUBLIC_KEY": algolia_key,
-        "ALGOLIA_PUBLIC_APP_ID": algolia_app_id,
+        "ALGOLIA_PUBLIC_KEY": ALGOLIA_PUBLIC_KEY,
+        "ALGOLIA_PUBLIC_APP_ID": ALGOLIA_PUBLIC_APP_ID,
     }
     return render(request, "job-list.html", context)
 
@@ -40,15 +38,13 @@ def employer_job_list(request, pk, slug=""):
 def employment_type_job_list(request):
     employment_type = request.GET['type']
     page_title = employment_type + " Jobs"
-    algolia_key = os.environ.get('ALGOLIA_PUBLIC_KEY')
-    algolia_app_id = os.environ.get('ALGOLIA_PUBLIC_APP_ID')
     posts = Job.objects.filter(employment_type=employment_type)
 
     context = {
         "page_title": page_title,
         "posts": posts,
-        "ALGOLIA_PUBLIC_KEY": algolia_key,
-        "ALGOLIA_PUBLIC_APP_ID": algolia_app_id,
+        "ALGOLIA_PUBLIC_KEY": ALGOLIA_PUBLIC_KEY,
+        "ALGOLIA_PUBLIC_APP_ID": ALGOLIA_PUBLIC_APP_ID,
     }
     return render(request, "job-list.html", context)
 
@@ -56,15 +52,13 @@ def employment_type_job_list(request):
 def location_job_list(request):
     location = request.GET['in']
     page_title = "Jobs in " +  location
-    algolia_key = os.environ.get('ALGOLIA_PUBLIC_KEY')
-    algolia_app_id = os.environ.get('ALGOLIA_PUBLIC_APP_ID')
     posts = Job.objects.filter(location__icontains=location)
 
     context = {
         "page_title": page_title,
         "posts": posts,
-        "ALGOLIA_PUBLIC_KEY": algolia_key,
-        "ALGOLIA_PUBLIC_APP_ID": algolia_app_id,
+        "ALGOLIA_PUBLIC_KEY": ALGOLIA_PUBLIC_KEY,
+        "ALGOLIA_PUBLIC_APP_ID": ALGOLIA_PUBLIC_APP_ID,
     }
     return render(request, "job-list.html", context)
 
@@ -107,12 +101,10 @@ def search_results(request):
     else:
         page_title = job_query.title() + " Jobs Anywhere"
 
-    algolia_key = os.environ.get('ALGOLIA_PUBLIC_KEY')
-    algolia_app_id = os.environ.get('ALGOLIA_PUBLIC_APP_ID')
     context = {
         "page_title": page_title,
         "posts": posts,
-        "ALGOLIA_PUBLIC_KEY": algolia_key,
-        "ALGOLIA_PUBLIC_APP_ID": algolia_app_id,
+        "ALGOLIA_PUBLIC_KEY": ALGOLIA_PUBLIC_KEY,
+        "ALGOLIA_PUBLIC_APP_ID": ALGOLIA_PUBLIC_APP_ID,
     }
     return render(request, "job-list.html", context)
