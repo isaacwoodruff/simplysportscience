@@ -14,8 +14,8 @@ def checkout_view(request):
             'currency': 'eur',
             'quantity': 1,
         }],
-        success_url='{% url "login" %}{CHECKOUT_SESSION_ID}',
-        cancel_url='{% url "jobs" %}',
+        success_url='https://example.com/success?session_id={CHECKOUT_SESSION_ID}',
+        cancel_url='https://example.com/cancel',
     )
     session_id = session.id
     
