@@ -17,11 +17,29 @@
 {% block javascript %}
 
 <script src="https://js.stripe.com/v3/"></script>
-<script>
-let stripe_pub = Stripe('{{ STRIPE_PUBLISHABLE }}');
-let sessionId = '{{ session_id }}'
+<script type='text/javascript'>
+    const stripe_pub = Stripe('{{ STRIPE_PUBLISHABLE }}');
+    const sessionId = '{{ session_id }}';
+
+
+    let stripe = Stripe(sessionId);
+    let elements = stripe.elements();
+
+    $('#submit-payment-btn').click(function () {
+        startCheckout();
+    });
+
+    async function startCheckout() {
+        const { error } = await stripe.redirectToCheckout({
+            sessionId: sessionId
+        });
+
+        if (error) {
+            alert('Something went wrong with the payment, please try again.');
+        }
+    }
+
 </script>
-<script src="{% static 'js/stripe.js' %}"></script>
 
 
 

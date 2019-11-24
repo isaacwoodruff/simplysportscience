@@ -9,14 +9,13 @@ def checkout_view(request):
     session = stripe.checkout.Session.create(
         payment_method_types=['card'],
         line_items=[{
-            'name': 'T-shirt',
-            'description': 't-shirt',
-            'amount': 500,
-            'currency': 'usd',
+            'name': 'MY product',
+            'amount': 1000,
+            'currency': 'eur',
             'quantity': 1,
         }],
-        success_url='https://example.com/success?session_id={CHECKOUT_SESSION_ID}',
-        cancel_url='https://example.com/cancel',
+        success_url='{% url "login" %}{CHECKOUT_SESSION_ID}',
+        cancel_url='{% url "jobs" %}',
     )
     session_id = session.id
     
