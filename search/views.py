@@ -47,7 +47,7 @@ def employer_job_list(request, pk, slug=""):
 
 
 def employment_type_job_list(request):
-    employment_type = request.GET['type']
+    employment_type = request.GET.get('type')
     page_title = employment_type + " Jobs"
 
     job_posts = Job.objects.filter(employment_type=employment_type)
