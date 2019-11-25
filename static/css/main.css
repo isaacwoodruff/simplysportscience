@@ -9,6 +9,13 @@ body {
     background-position: top;
 }
 
+.job-details-bg {
+    background-image: url("https://images.pexels.com/photos/933054/pexels-photo-933054.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: top;
+}
+
 .navbar {
     z-index: 1;
 }
@@ -68,6 +75,12 @@ body {
     top: 30vh;
 }
 
+.job-details-page {
+    background: #fff;
+    border-radius: 50px;
+    padding: 30px;
+}
+
 .input-group .algolia-places {
     width: auto;
     color: #000;
@@ -113,7 +126,7 @@ body {
     }
 }
 
-@media (max-width: 585px) {
+@media (max-width: 991px) {
     .btn-circle {
        margin-left: 0;
        margin-right: 0;
