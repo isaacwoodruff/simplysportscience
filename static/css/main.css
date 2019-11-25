@@ -86,6 +86,18 @@ body {
     border-top: 2px solid rgb(30, 224, 255);
 }
 
+.btn-circle {
+    width: 60px;
+    height: 60px;
+    padding: 6px 2px 8px 0;
+    border-radius: 30px;
+    text-align: center;
+    font-size: 12px;
+    line-height: 1.42857;
+    margin-left: -7em;
+    margin-right: 2em;
+}
+
 @media (max-width: 768px) {
     .btn-search {
         width: 100%;
@@ -98,5 +110,12 @@ body {
     .input-group-append .bootstrap-select:not([class*="col-"]):not([class*="form-control"]):not(.input-group-btn) {
         max-width: 100%;
         width: 100%;
+    }
+}
+
+@media (max-width: 585px) {
+    .btn-circle {
+       margin-left: 0;
+       margin-right: 0;
     }
 }
