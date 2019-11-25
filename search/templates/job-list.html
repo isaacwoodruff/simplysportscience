@@ -12,16 +12,16 @@
         </div>
         <div class="row justify-content-center">
             <div class="col col-12 justify-content-center">
-                <form id=”search” action="{% url 'search_results' %}" method="GET">
+                <form id="search" action="{% url 'search_results' %}" method="GET">
                     <div class="input-group justify-content-center mb-3 d-block d-md-flex">
                         <div class="input-group-prepend mr-md-3 d-block d-md-flex">
                             <h5 class="d-md-none">Job title, keywords, or company</h5>
                             <input type="text" class="form-control" placeholder="Job title" aria-label="job title"
-                                aria-describedby="job-title-input" id="job-title" name="job-title" />
+                                aria-describedby="job-title-input" id="job-title" name="job-title" value="{{ form_data.job_query }}" />
                         </div>
                         <h5 class="d-md-none mt-5 mt-md-0">City, region, or country</h5>
                         <input class="form-control" type="search" id="address-input" placeholder="Location"
-                            name="location" />
+                            name="location" value="{{ form_data.location_query }}" />
                         <h5 class="d-md-none mt-5 mt-md-0">Full time, part time etc.</h5>
                         <div class="input-group-append mt-md-0 ml-md-3">
                             <select name="employment-type" class="selectpicker show-tick" data-title="Filter" multiple>
@@ -48,30 +48,58 @@
 {% load static %}
 
 {% if posts %}
-{% for post in posts %}
-<div class="row job-post">
-    <div class="col col-5 col-sm-6 col-md-4 col-lg-6 d-flex align-items-center">
-        <a href="{{ post.get_absolute_url }}" class="text-dark">{{ post.title }}</a>
-    </div>
-    <div class="col col-md-3 offset-md-1 col-lg-3 offset-lg-1 d-none d-md-flex align-items-center">
-        <a href="{% url 'location_job_list' %}?in={{ post.location }}" class="text-muted">{{ post.location }} - {{ post.date_created }}</a>
-    </div>
-    <div
-        class="col col-5 offset-2 col-sm-3 offset-sm-3 col-md-3 offset-md-1 col-lg-2 offset-lg-0 d-sm-flex align-items-center">
-        <a href="{% url 'employment_type_job_list' %}?type={{ post.employment_type }}"
-            class="btn btn-outline-info">{{ post.employment_type }}</a>
-    </div>
-    <div class="row">
-        <div class="col">
-            <p><a href="{{ post.employer_fk.get_absolute_url }}" class="text-danger">{{ post.employer }}</a></p>
-            <a href="{% url 'location_job_list' %}?in={{ post.location }}"
-                class="d-block d-md-none pt-3 pb-1 text-muted">{{ post.location }}</a>
+
+    {% for post in posts %}
+
+    <div class="row job-post">
+        <div class="col col-5 col-sm-6 col-md-4 col-lg-6 d-flex align-items-center">
+            <a href="{{ post.get_absolute_url }}" class="text-dark">{{ post.title }}</a>
+        </div>
+        <div class="col col-md-3 offset-md-1 col-lg-3 offset-lg-1 d-none d-md-flex align-items-center">
+            <a href="{% url 'location_job_list' %}?in={{ post.location }}" class="text-muted">{{ post.location }} - {{ post.date_created }}</a>
+        </div>
+        <div
+            class="col col-5 offset-2 col-sm-3 offset-sm-3 col-md-3 offset-md-1 col-lg-2 offset-lg-0 d-sm-flex align-items-center">
+            <a href="{% url 'employment_type_job_list' %}?type={{ post.employment_type }}"
+                class="btn btn-outline-info">{{ post.employment_type }}</a>
+        </div>
+        <div class="row">
+            <div class="col">
+                <p><a href="{{ post.employer_fk.get_absolute_url }}" class="text-danger">{{ post.employer }}</a></p>
+                <a href="{% url 'location_job_list' %}?in={{ post.location }}"
+                    class="d-block d-md-none pt-3 pb-1 text-muted">{{ post.location }}</a>
+            </div>
         </div>
     </div>
+
+    {% endfor %}
+
+{% endif %}
+
+<div class="row justify-content-center mt-5">
+    {% if posts %}
+
+        {% if posts.has_previous %}
+            <a class="btn btn-outline-info" href="?job-title={{ form_data.job_query }}&location={{ form_data.location_query }}&page=1">First</a>
+            <a class="btn btn-outline-info" href="?job-title={{ form_data.job_query }}&location={{ form_data.location_query }}&page={{ posts.previous_page_number }}">Previous</a>
+        {% endif %}
+
+        {% for num in posts.paginator.page_range %}
+            {% if posts.number == num %}
+                <a class="btn btn-info" href="?job-title={{ form_data.job_query }}&location={{ form_data.location_query }}&page={{ num }}">{{ num }}</a>
+            {% elif num > posts.number|add:"-3" and num < posts.number|add:"3" %}
+                <a class="btn btn-outline-info" href="?job-title={{ form_data.job_query }}&location={{ form_data.location_query }}&page={{ num }}">{{ num }}</a>
+            {% endif %}
+        {% endfor %}
+
+        {% if posts.has_next %}
+            <a class="btn btn-outline-info" href="?job-title={{ form_data.job_query }}&location={{ form_data.location_query }}&page={{ posts.next_page_number }}">Next</a>
+            <a class="btn btn-outline-info" href="?job-title={{ form_data.job_query }}&location={{ form_data.location_query }}&page={{ posts.paginator.num_pages }}">Last</a>
+        {% endif %}
+
+    {% endif %}
 </div>
 
-{% endfor %}
-{% endif %}
 {% endblock %}
 
 {% block javascript %}
