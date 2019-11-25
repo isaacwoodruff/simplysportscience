@@ -61,6 +61,11 @@ body {
 
 .job-post button {
     min-width: 6rem;
+    min-height: 4rem;
+}
+
+.job-post .sticky-top {
+    top: 30vh;
 }
 
 .input-group .algolia-places {
