@@ -94,7 +94,7 @@ def login_view(request):
 
     context = {
         "form": form,
-        "page_title": "Log In",
+        "page_title": "Sign In",
     }
     return render(request, "login.html", context)
 
