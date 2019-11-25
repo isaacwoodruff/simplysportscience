@@ -39,6 +39,9 @@ class Job(models.Model):
 
     slug = models.SlugField(default="")
 
+    class Meta:
+        ordering = ['-created_date']
+
     def __str__(self):
         return self.title + " - " + self.employer
 
