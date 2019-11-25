@@ -46,6 +46,10 @@ body {
     min-height: 400px;
 }
 
+#navbar-bg-default {
+    background: #1ab7d0;
+}
+
 .job-post {
     box-shadow: 0 2px 2px -2px #807f7f;
     padding: 20px;
