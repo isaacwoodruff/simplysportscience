@@ -6,12 +6,6 @@ from django.contrib.auth.models import User
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth import authenticate, login
 
-def register_choice(request):
-    context = {
-        "choice" : "choice",
-        "page_title" : "Register",
-    }
-    return render(request, "register.html", context)
 
 def register_employer(request):
     if request.method == "POST":

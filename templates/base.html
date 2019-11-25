@@ -21,7 +21,7 @@
 </head>
 
 <body {% block body_class %}{% endblock %}>
-    <div id="{% block job_wrapper_id %}{% if page_title != 'Sign In' %}navbar-bg-default{% endif %}{% endblock %}">
+    <div {% block upper_page_wrapper_id %}id="navbar-bg-default"{% endblock %}>
         <nav class="navbar navbar-expand-md navbar-dark static-top">
             <div class="container">
                 <a class="navbar-brand" href="#">Simply Sport Science</a>

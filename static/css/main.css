@@ -82,6 +82,10 @@ body {
     border-radius: 10px;
 }
 
+.hr-active {
+    border-top: 2px solid rgb(30, 224, 255);
+}
+
 @media (max-width: 768px) {
     .btn-search {
         width: 100%;

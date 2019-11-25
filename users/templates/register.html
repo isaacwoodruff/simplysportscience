@@ -1,28 +1,43 @@
 {% extends 'base.html' %}
+{% block body_class %}class="sign-in-bg"{% endblock %}
 {% load crispy_forms_tags %}
 {% block content %}
-{% if choice %}
+{% block upper_page_wrapper_id %}{% endblock %}
+
 <div class="row">
-    <div class="col col-12">
-        <h1>Which are you?</h1>
-        <p><a href="{% url "register_candidate" %}">Candidate</a> or <a href="{% url "register_employer" %}">Employer</a>?</p>
+        <div class="col col-10 offset-1 col-md-8 offset-md-2 col-lg-6 offset-lg-3 p-4 sign-in">
+            <div class="row mb-4">
+                <div class="col col-12 text-center">
+                    <h3>Sign Up</h3>
+                    <p class="text-secondary">Ready to discover some amazing opportunities?</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col col-6 text-center">
+                    <a class="btn btn-outline-info" href="{% url 'register_candidate' %}">I'm a Candidate</a>
+                    {% if page_title == "For Candidates" %}
+                        <hr class="hr-active" />
+                    {% endif %}
+                </div>
+                <div class="col col-6 text-center">
+                    <a class="btn btn-outline-info" href="{% url 'register_employer' %}">I'm an Employer</a>
+                    {% if page_title == "For Employers" %}
+                        <hr class="hr-active" />
+                    {% endif %}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col col-12">
+                    <form method="POST">
+                        {% csrf_token %}
+                        {{ form | crispy }}
+                        <button class="btn btn-outline-info w-100 my-3" type="submit">Sign Up</button>
+                        <div class="text-center mt-4">
+                            <p class="text-secondary">Already have an account? <a href="{% url 'login' %}">Sign In</a></p>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
-</div>
-{% else %}
-<div class="row">
-    <div class="col col-12 col-md-7 col-lg-6">
-        <h1>Lorem ipsum dolor</h1>
-        <p>"Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?</p>
-    </div>
-    <div class="col col-12 d-sm-block d-md-none mt-5"></div>
-    <div class="col col-12 offset-md-1 col-md-4 offset-lg-1 col-lg-5">
-        <h1>Join Now!</h1>
-        <form method="POST">
-            {% csrf_token %}
-            {{ form | crispy }}
-            <button class="btn btn-outline-info" type="submit">Register</button>
-        </form>
-    </div>
-</div>
-{% endif %}
 {% endblock %}
