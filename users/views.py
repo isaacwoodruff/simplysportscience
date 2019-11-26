@@ -124,3 +124,21 @@ def candidate_profile(request):
     }
 
     return render(request, "profile.html", context)
+
+
+def employers_page(request):
+
+    context = {
+        "page_title": "Employers",
+    }
+
+    return render(request, "employers.html", context)
+
+
+def candidates_page(request):
+
+    context = {
+        "page_title": "Candidates",
+    }
+
+    return render(request, "candidates.html", context)

@@ -53,6 +53,14 @@ body {
     min-height: 400px;
 }
 
+#can-emp-page-wrapper {
+    background-image: url("https://images.pexels.com/photos/36487/above-adventure-aerial-air.jpg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: top;
+    min-height: 200px;
+}
+
 #navbar-bg-default {
     background: #1ab7d0;
 }
