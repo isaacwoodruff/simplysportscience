@@ -6,10 +6,10 @@
 {% block content %}
 <div class="row">
 
-    <div class="col col-10 offset-1 b-radius-50 bg-light">
+    <div class="col col-10 offset-1 p-5 p-md-4 b-radius-50 bg-light">
 
         <div class="row">
-            <div class="col col-12 my-5 text-center text-dark">
+            <div class="col col-12 mt-5 mb-4 text-center text-dark">
                 <h3>Interested in finding top talent?</h3>
             </div>
         </div>
@@ -17,6 +17,7 @@
         <div class="row text-dark">
 
             <div class="col col-12 col-md-8 col-lg-6 offset-lg-1 mb-5">
+                <hr />
                 <p>Do you have a job vacancy that you need publicized to the best possible selection of candidates? At
                     Simply
                     Sport Science we have an ever-growing pool of users, all part of the sport and fitness community,
@@ -31,9 +32,10 @@
                 <p>So what are you waiting for? Sign up now, post your job advertisement and we’ll help you find your
                     perfect
                     employee.</p>
+                <hr />
             </div>
 
-            <div class="col col-12 col-md-4 text-center">
+            <div class="col col-12 col-md-4 text-center align-self-center">
                 <a href="{% url 'register_employer' %}" class="btn btn-outline-dark">Register as an employer</a>
                 <p class="my-5">Or</p>
                 <a href="{% url 'register_candidate' %}" class="btn btn-outline-dark mb-5">Register as a candidate</a>
