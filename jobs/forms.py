@@ -1,6 +1,14 @@
 from django import forms
 from .models import Job
 
+
+'''
+Form for a new job post. The location field has attributes necessary for the Algolia API
+to work. The employer field is hidden, then filled in in the view with the logged
+in employer. The slug is hidden and then filled in in the view from the title
+'''
+
+
 class JobPostForm(forms.ModelForm):
     employment_type = forms.ChoiceField
     title = forms.CharField(max_length=200, required=True)
@@ -10,10 +18,12 @@ class JobPostForm(forms.ModelForm):
     employer = forms.CharField(required=False)
     slug = forms.SlugField(required=False)
 
-    location.widget = forms.TextInput(attrs={'id': "address-input", 'placeholder': 'Please select from list'})
+    location.widget = forms.TextInput(
+        attrs={'id': "address-input", 'placeholder': 'Please select from list'})
     employer.widget = employer.hidden_widget()
     slug.widget = slug.hidden_widget()
 
     class Meta:
         model = Job
-        fields = ["title", "location", "employment_type", "description", "requirements"]
+        fields = ["title", "location", "employment_type",
+                  "description", "requirements"]

@@ -6,7 +6,9 @@ from django.contrib.auth.decorators import login_required
 from .models import Job
 from .forms import JobPostForm
 
-
+'''
+Renders details of a specific job post
+'''
 def job_details(request, pk, slug=""):
     job_post = get_object_or_404(Job, pk=pk)
 
@@ -16,7 +18,13 @@ def job_details(request, pk, slug=""):
     }
     return render(request, "job-details.html", context)
 
-
+'''
+Creates a new job post for a logged in user who is an employer.
+Assigns the hidden form field 'employer' the company_name of the current user.
+Creates a slug for the hidden slug field from the form title.
+After saving it finds the new job post in the database and redirects to it.
+Algolia keys are for the Algolia API location autofill field in the form
+'''
 @login_required
 def new_job(request):
     if request.method == "POST":
@@ -24,7 +32,6 @@ def new_job(request):
         if form.is_valid():
             form_obj = form.save(commit=False)
             employer_user = request.user.employerprofile
-            form_obj.employer_fk = employer_user
             form_obj.employer = employer_user.company_name
 
             form_obj.slug = slugify(form.cleaned_data.get("title"))

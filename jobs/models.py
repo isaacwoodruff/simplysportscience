@@ -22,10 +22,11 @@ class Job(models.Model):
     )
 
     employment_type = models.CharField(max_length=50,
-                                        choices=EMPLOYMENT_TYPE_CHOICES,
-                                        default=FULL_TIME)
+                                       choices=EMPLOYMENT_TYPE_CHOICES,
+                                       default=FULL_TIME)
 
-    employer_fk = models.ForeignKey(EmployerProfile, on_delete=models.CASCADE, null=True)
+    employer_fk = models.ForeignKey(
+        EmployerProfile, on_delete=models.CASCADE, null=True)
     title = models.CharField(max_length=200)
     description = models.TextField(default="")
     requirements = models.TextField(default="")
@@ -39,11 +40,13 @@ class Job(models.Model):
 
     slug = models.SlugField(default="")
 
+    '''Ordering is set by the date created descending to give the newest results'''
     class Meta:
         ordering = ['-created_date']
 
     def __str__(self):
         return self.title + " - " + self.employer
 
+    '''Generates the url for the job post with its slug'''
     def get_absolute_url(self):
         return reverse('job_details', kwargs={'pk': self.pk, 'slug': self.slug})
