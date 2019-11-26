@@ -1,9 +1,13 @@
 {% extends 'base.html' %}
+
+{% block upper_page_wrapper_id %}{% endblock %}
+{% block body_class %}class="job-details-bg"{% endblock %}
 {% load crispy_forms_tags %}
+
 {% block content %}
 <div class="row justify-content-center">
-    <div class="col col-12 col-lg-6">
-        <h1>{{ page_title }}</h1>
+    <div class="col col-12 col-lg-6 new-job">
+        <h1 class="text-light">{{ page_title }}</h1>
         <form method="POST">
             {% csrf_token %}
             {{ new_job_form | crispy }}

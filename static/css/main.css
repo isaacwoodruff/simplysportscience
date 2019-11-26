@@ -89,6 +89,10 @@ body {
     padding: 30px;
 }
 
+.new-job label {
+    color: #FFF;
+}
+
 .input-group .algolia-places {
     width: auto;
     color: #000;
