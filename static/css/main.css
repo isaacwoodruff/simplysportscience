@@ -1,5 +1,10 @@
 body {
     min-height: 100vh;
+    font-family: 'Quicksand', sans-serif;
+}
+
+body h1, h2, h3, h4, h5, h6 {
+    font-family: 'Fugaz One', cursive;
 }
 
 .sign-in-bg {
@@ -115,7 +120,6 @@ body {
     text-align: center;
     font-size: 12px;
     line-height: 1.42857;
-    margin-left: -7em;
     margin-right: 2em;
 }
 
