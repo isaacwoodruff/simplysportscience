@@ -16,6 +16,13 @@ body {
     background-position: top;
 }
 
+#can-emp-page-bg {
+    background-image: url("https://i.ibb.co/GxSRZHN/sky-background.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
 .navbar {
     z-index: 1;
 }
@@ -53,14 +60,6 @@ body {
     min-height: 400px;
 }
 
-#can-emp-page-wrapper {
-    background-image: url("https://images.pexels.com/photos/36487/above-adventure-aerial-air.jpg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940");
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: top;
-    min-height: 200px;
-}
-
 #navbar-bg-default {
     background: #1ab7d0;
 }
@@ -83,10 +82,8 @@ body {
     top: 30vh;
 }
 
-.job-details-page {
-    background: #fff;
+.b-radius-50 {
     border-radius: 50px;
-    padding: 30px;
 }
 
 .new-job label {
