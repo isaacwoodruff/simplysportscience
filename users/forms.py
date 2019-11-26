@@ -15,13 +15,12 @@ class EmployerRegistrationForm(UserCreationForm):
 
 class EmployerUpdateForm(forms.ModelForm):
     email = forms.EmailField()
-    company_name = forms.CharField(max_length=200)
     username = forms.EmailField(required=False)
     username.widget = username.hidden_widget()
 
     class Meta:
         model = User
-        fields = ["company_name", "email"]
+        fields = ["email"]
 
 class EmployerProfileUpdateForm(forms.ModelForm):
     class Meta:

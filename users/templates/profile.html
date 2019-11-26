@@ -1,14 +1,17 @@
 {% extends 'base.html' %}
+{% block upper_page_wrapper_id %}{% endblock %}
+{% block body_class %}class="job-details-bg"{% endblock %}
 {% load crispy_forms_tags %}
+
 {% block content %}
 <div class="row">
-    <div class="col col-12">
-        <h1>Edit Profile</h1>
+    <div class="col col-12 col-md-8 offset-md-2 text-light mt-5">
+        <h1 class="text-center">Edit Profile</h1>
         <form method="POST">
             {% csrf_token %}
             {{ update_form | crispy }}
             {{ profile_form | crispy }}
-            <button class="btn btn-outline-info" type="submit">Update</button>
+            <button class="btn btn-info" type="submit">Update</button>
         </form>
     </div>
 </div>

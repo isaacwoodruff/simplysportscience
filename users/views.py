@@ -105,23 +105,31 @@ def logged_user_type(request):
 
 @login_required
 def employer_profile(request):
-    update_form = user_forms.EmployerUpdateForm()
-    profile_form = user_forms.EmployerProfileUpdateForm()
+    try:
+        request.user.employerprofile
+        update_form = user_forms.EmployerUpdateForm()
+        profile_form = user_forms.EmployerProfileUpdateForm()
 
-    context = {
-        "update_form": update_form,
-        "profile_form": profile_form,
-    }
+        context = {
+            "update_form": update_form,
+            "profile_form": profile_form,
+        }
+    except ObjectDoesNotExist:
+        return redirect("candidate_profile")
 
     return render(request, "profile.html", context)
 
 @login_required
 def candidate_profile(request):
-    update_form = user_forms.CandidateUpdateForm()
+    try:
+        request.user.candidateprofile
+        update_form = user_forms.CandidateUpdateForm()
 
-    context = {
-        "update_form": update_form,
-    }
+        context = {
+            "update_form": update_form,
+        }
+    except ObjectDoesNotExist:
+        return redirect("employer_profile")
 
     return render(request, "profile.html", context)
 
