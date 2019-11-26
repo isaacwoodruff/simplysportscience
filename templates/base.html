@@ -23,7 +23,7 @@
 </head>
 
 <body {% block body_class %}{% endblock %}>
-    <div {% block upper_page_wrapper_id %}id="navbar-bg-default"{% endblock %}>
+    <header {% block upper_page_wrapper_id %}id="navbar-bg-default"{% endblock %}>
         <nav class="navbar navbar-expand-md navbar-dark static-top">
             <div class="container">
                 <a class="navbar-brand" href="#">Simply Sport Science</a>
@@ -68,15 +68,17 @@
         </nav>
     
         {% block banner %}{% endblock %}
-    </div>  
-        <div class="container my-5">
-            {% if messages %}
-                {% for message in messages %}
-                    <p class="alert alert-{{ message.tags }}">{{ message }}</p>
-                {% endfor %}
-            {% endif %}
-            {% block content %} {% endblock %}
-        </div>
+    </header>
+    
+    <main class="container my-5">
+        {% if messages %}
+            {% for message in messages %}
+                <p class="alert alert-{{ message.tags }}">{{ message }}</p>
+            {% endfor %}
+        {% endif %}
+        {% block content %} {% endblock %}
+    </main>
+    
     <footer>
 
     </footer>
