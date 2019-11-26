@@ -86,6 +86,10 @@ body {
     border-radius: 50px;
 }
 
+.b-radius-10 {
+    border-radius: 10px;
+}
+
 .new-job label {
     color: #FFF;
 }
@@ -97,11 +101,6 @@ body {
 
 .bootstrap-select {
     max-width: 80px;
-}
-
-.sign-in {
-    background:#FFF;
-    border-radius: 10px;
 }
 
 .hr-active {
