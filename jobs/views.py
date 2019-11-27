@@ -10,11 +10,11 @@ from .forms import JobPostForm
 Renders details of a specific job post
 '''
 def job_details(request, pk, slug=""):
-    job_post = get_object_or_404(Job, pk=pk)
+    post = get_object_or_404(Job, pk=pk)
 
     context = {
-        "page_title": job_post.title,
-        "post": job_post,
+        "page_title": post.title,
+        "post": post,
     }
     return render(request, "job-details.html", context)
 
