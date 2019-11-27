@@ -1,104 +1,124 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-    {% load static %}
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <head>
+        {% load static %}
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-    <!-- google fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Fugaz+One|Quicksand&display=swap" rel="stylesheet"> 
-    
-    <!-- fontawesome -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+        <!-- google fonts -->
+        <link href="https://fonts.googleapis.com/css?family=Fugaz+One|Quicksand&display=swap" rel="stylesheet"> 
+        
+        <!-- fontawesome -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
-    <!-- bootstrap css -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+        <!-- bootstrap css -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 
-    <!-- custom css -->
-    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+        <!-- custom css -->
+        <link rel="stylesheet" href="{% static 'css/main.css' %}">
 
-    <title>{% if page_title %}
-        {{ page_title }} | Simply Sport Science
-        {% else %}
-        Simply Sport Science
-        {% endif %}</title>
-</head>
+        <title>{% if page_title %}
+            {{ page_title }} | Simply Sport Science
+            {% else %}
+            Simply Sport Science
+            {% endif %}</title>
+    </head>
 
-<body {% block body_class %}{% endblock %}>
-    <header {% block upper_page_wrapper_id %}id="navbar-bg-default"{% endblock %}>
-        <nav class="navbar navbar-expand-md navbar-dark static-top">
-            <div class="container">
-                <a class="navbar-brand" href="#">Simply Sport Science</a>
+    <!-- jinja body tag is used to apply different background images to the body depending on the page -->
+    <body {% block body_class %}{% endblock %}>
 
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
-                    aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
+        
+        <!-- jinja header tag is used to apply different background images to the header.
+            if the tag is empty it uses a default navbar background color so text is visible -->
+        <header {% block upper_page_wrapper_id %}id="navbar-bg-default"{% endblock %}>
 
-                <div class="collapse navbar-collapse" id="navbarResponsive">
-                    <ul class="navbar-nav ml-auto">
-                        <li class="nav-item">
-                            <a class="nav-link" href="{% url 'jobs' %}">Jobs</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{% url 'employers' %}">Employers</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{% url 'candidates' %}">Candidates</a>
-                        </li>
-                        {% if request.user.is_authenticated %}
+            <nav class="navbar navbar-expand-md navbar-dark static-top">
 
-                            {% if request.user.employerprofile %}
+                <div class="container">
+                    <a class="navbar-brand" href="#">Simply Sport Science</a>
+
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+                        aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+
+                    <div class="collapse navbar-collapse" id="navbarResponsive">
+
+                        <ul class="navbar-nav ml-auto">
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'jobs' %}">Jobs</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'employers' %}">Employers</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'candidates' %}">Candidates</a>
+                            </li>
+
+                            {% if request.user.is_authenticated %}
+
+                                {% if request.user.employerprofile %}
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{% url 'employer_profile' %}">Profile</a>
+                                    </li>
+                                {% elif request.user.candidateprofile %}
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{% url 'candidate_profile' %}">Profile</a>
+                                    </li>
+                                {% endif %}
+
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{% url 'employer_profile' %}">Profile</a>
+                                    <a class="nav-link" href="{% url 'logout' %}">Logout</a>
                                 </li>
-                            {% elif request.user.candidateprofile %}
+
+                            {% else %}
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{% url 'candidate_profile' %}">Profile</a>
+                                    <a class="nav-link" href="{% url 'login' %}">Sign In</a>
                                 </li>
                             {% endif %}
 
-                            <li class="nav-item">
-                                <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+                            <li class="nav-item btn btn-outline-info post-job-link">
+                                <a class="nav-link" href="{% url 'new_job' %}">Post Job</a>
                             </li>
+                        </ul>
 
-                        {% else %}
-                            <li class="nav-item">
-                                <a class="nav-link" href="{% url 'login' %}">Sign In</a>
-                            </li>
-                        {% endif %}
-                        <li class="nav-item btn btn-outline-info post-job-link">
-                            <a class="nav-link" href="{% url 'new_job' %}">Post Job</a>
-                        </li>
-                    </ul>
+                    </div>
+
                 </div>
-            </div>
-        </nav>
-    
-        {% block banner %}{% endblock %}
-    </header>
-    
-    <main class="container my-5">
-        {% if messages %}
-            {% for message in messages %}
-                <p class="alert alert-{{ message.tags }}">{{ message }}</p>
-            {% endfor %}
-        {% endif %}
-        {% block content %} {% endblock %}
-    </main>
-    
-    <footer>
 
-    </footer>
-    <!-- jquery javascript -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+            </nav>
+            
+            <!-- banner information goes here -->
+            {% block banner %}{% endblock %}
+        </header>
+        
+        <main class="container my-5">
 
-    <!-- bootstrap javascript -->
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+            <!-- any messages from the backend will be displayed above the main block content -->
+            {% if messages %}
+                {% for message in messages %}
+                    <p class="alert alert-{{ message.tags }}">{{ message }}</p>
+                {% endfor %}
+            {% endif %}
 
-    {% block javascript %} {% endblock %}
-</body>
+            {% block content %}{% endblock %}
+
+        </main>
+        
+        <footer>
+
+        </footer>
+
+        <!-- jquery javascript -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+        <!-- bootstrap javascript -->
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+
+        {% block javascript %} {% endblock %}
+        
+    </body>
 
 </html>
