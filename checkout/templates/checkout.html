@@ -1,14 +1,12 @@
 {% extends "base.html" %}
-{% block content %}
 {% load static %}
+{% block upper_page_wrapper_id %}{% endblock %}
+{% block body_class %}class="job-details-bg"{% endblock %}
 
-<div class="row">
-    <div class="col col-12">
-        <h2>Buy for $5.00</h2>
-        <form action="" method="POST">
-            {% csrf_token %}
-            <button id="submit-payment-btn" type="submit">Pay</button>
-        </form>
+{% block content %}
+<div class="row pt-5 text-center">
+    <div class="col col-10 offset-1 col-md-8 offset-md-2 col-lg-6 offset-lg-3 p-4 mt-5 bg-light b-radius-10">
+        <p class="p-0 m-0">You are being redirected to Stripe for secure payment.</p>
     </div>
 </div>
 
@@ -17,30 +15,11 @@
 {% block javascript %}
 
 <script src="https://js.stripe.com/v3/"></script>
+
 <script type='text/javascript'>
-    const stripe_pub = Stripe('{{ STRIPE_PUBLISHABLE }}');
+    const stripe = Stripe('{{ STRIPE_PUBLISHABLE }}');
     const sessionId = '{{ session_id }}';
-
-
-    let stripe = Stripe(sessionId);
-    let elements = stripe.elements();
-
-    $('#submit-payment-btn').click(function () {
-        startCheckout();
-    });
-
-    async function startCheckout() {
-        const { error } = await stripe.redirectToCheckout({
-            sessionId: sessionId
-        });
-
-        if (error) {
-            alert('Something went wrong with the payment, please try again.');
-        }
-    }
-
 </script>
-
-
+<script src="{% static 'js/stripe.js' %}"></script>
 
 {% endblock %}

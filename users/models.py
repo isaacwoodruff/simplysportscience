@@ -14,6 +14,7 @@ class EmployerProfile(models.Model):
     is_employer = models.BooleanField(default=True)
     is_candidate = models.BooleanField(default=False)
     company_name = models.CharField(max_length=200)
+    credits = models.IntegerField(default=0)
 
     slug = models.SlugField(default="")
 

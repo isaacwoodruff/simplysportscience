@@ -1,7 +1,7 @@
-$(document).ready(function() {
-    $('#submit-payment-btn').click(function() {
-        stripe.redirectToCheckout({
-            sessionId: session_id
-        });
+let elements = stripe.elements();
+
+$('document').ready(function () {
+    stripe.redirectToCheckout({
+        sessionId: sessionId
     });
 });

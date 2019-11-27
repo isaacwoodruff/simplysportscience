@@ -1,24 +1,28 @@
-from django.conf import settings
 import stripe
-from django.shortcuts import render
+from django.conf import settings
+from django.shortcuts import render, redirect
+from django.contrib.auth.decorators import login_required
+
 
 stripe.api_key = settings.STRIPE_SECRET
 STRIPE_PUBLISHABLE = settings.STRIPE_PUBLISHABLE
 
+
+@login_required
 def checkout_view(request):
     session = stripe.checkout.Session.create(
         payment_method_types=['card'],
         line_items=[{
-            'name': 'MY product',
-            'amount': 1000,
+            'name': 'Job Post',
+            'amount': 10000,
             'currency': 'eur',
             'quantity': 1,
         }],
-        success_url='https://example.com/success?session_id={CHECKOUT_SESSION_ID}',
-        cancel_url='https://example.com/cancel',
+        success_url='https://simplysportscience.herokuapp.com/checkout/router/',
+        cancel_url='https://simplysportscience.herokuapp.com/jobs/search/',
     )
     session_id = session.id
-    
+
     context = {
         "page_title": "Checkout",
         "STRIPE_PUBLISHABLE": STRIPE_PUBLISHABLE,
@@ -26,5 +30,10 @@ def checkout_view(request):
     }
     return render(request, "checkout.html", context)
 
-def charge_view(request):
-    return render(request, 'charge.html')
+@login_required
+def credit_view(request):
+    profile = request.user.employerprofile
+    profile.credits += 1
+    profile.save()
+    print(profile.credits)
+    return redirect("new_job")
