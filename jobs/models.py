@@ -52,7 +52,12 @@ class Job(models.Model):
     def days_since_creation(self):
         current_time = datetime.now()
         if self.created_date.month == current_time.month:
-            return str(current_time.day - self.created_date.day) + " days ago"
+            days_since = str(current_time.day - self.created_date.day)
+
+            if days_since == 0 or days_since == "0":
+                return "Posted Today"
+            else:
+                return  days_since + " days ago"
         return self.created_date.strftime("%b %d")
 
     '''Generates the url for the job post with its slug'''
