@@ -7,6 +7,18 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth import authenticate, login
 
 
+'''
+The employer registration view takes the forms value of the email field
+and assigns it to the hidden username field.
+
+After the User is created, a query is made to get the EmployerProfile object
+from the database. Then the information for this model is assigned and saved.
+
+The new_user is then authenticated and logged in with the form data and
+redirected to a view that routes it to their new profile.
+
+The registration form is just rendered if the request method is not POST
+'''
 def register_employer(request):
     if request.method == "POST":
         form = user_forms.EmployerRegistrationForm(request.POST)
@@ -28,6 +40,7 @@ def register_employer(request):
                                     password=form.cleaned_data['password1'],
                                     )
             login(request, new_user)
+            return redirect("logged_user_type")
     else:
         form = user_forms.EmployerRegistrationForm()
 
@@ -38,6 +51,10 @@ def register_employer(request):
     return render(request, "register.html", context)
 
 
+'''
+The candidate registration view is the same as the employer registration view except
+the forms are different and the CandidateProfile fields that are saved are different.
+'''
 def register_candidate(request):
     if request.method == "POST":
         form = user_forms.CandidateRegistrationForm(request.POST)
@@ -60,6 +77,7 @@ def register_candidate(request):
                                     password=form.cleaned_data['password1'],
                                     )
             login(request, new_user)
+            return redirect("logged_user_type")
     else:
         form = user_forms.CandidateRegistrationForm()
 
@@ -70,6 +88,11 @@ def register_candidate(request):
     return render(request, "register.html", context)
 
 
+'''
+When the LoginForm is submitted and validated the user is authenticated.
+If they are authenticated then they are logged in and redirected to a 
+view that routes them to their specific profile (Employer/Candidate)
+'''
 def login_view(request):
     if request.method == "POST":
         form = user_forms.LoginForm(request.POST)
@@ -80,7 +103,7 @@ def login_view(request):
             if user:
                 login(request, user)
                 messages.success(request, "You have logged in successfully!")
-                redirect(logged_user_type)
+                return redirect("logged_user_type")
             else:
                 messages.warning(request, "Your password/email is incorrect")
     else:
@@ -93,6 +116,15 @@ def login_view(request):
     return render(request, "login.html", context)
 
 
+'''
+This view is used to route the logged in User to their specific profile.
+It trys to access the EmployerProfile of a logged in User. If they dont
+exist then the User is a CandidateProfile and the view name is assinged 
+to the user_type. If they exist then the User is an EmployerProfile and
+the view name is assinged to the user_type. Then a redirect is called
+with the user_type.
+'''
+@login_required
 def logged_user_type(request):
     try:
         request.user.employerprofile
@@ -104,11 +136,21 @@ def logged_user_type(request):
     return redirect(user_type)
 
 
+'''
+Checks to see if the User is an Employer. If they are not then it
+redirects to the candidate_profile view.
+
+If they are an employer it renders 2 forms to update the User and
+EmployerProfile objects. The username field is assigned the value
+of the email field automatically.
+'''
 @login_required
 def employer_profile(request):
     try:
         request.user.employerprofile
-
+    except ObjectDoesNotExist:
+        return redirect("candidate_profile")
+    else:
         if request.method == "POST":
             update_form = user_forms.EmployerUpdateForm(
                 data=request.POST, instance=request.user)
@@ -137,17 +179,22 @@ def employer_profile(request):
                 "update_form": update_form,
                 "profile_form": profile_form,
             }
-    except ObjectDoesNotExist:
-        return redirect("candidate_profile")
 
     return render(request, "profile.html", context)
 
 
+'''
+The candidate_profile view is the same as employer_profile view except the
+forms are different. This view only updates the User object because the
+CandidateProfile doesnt have any information that the user should change.
+'''
 @login_required
 def candidate_profile(request):
     try:
         request.user.candidateprofile
-
+    except ObjectDoesNotExist:
+        return redirect("employer_profile")
+    else:
         if request.method == "POST":
             update_form = user_forms.CandidateUpdateForm(
                 data=request.POST, instance=request.user)
@@ -168,10 +215,9 @@ def candidate_profile(request):
             context = {
                 "update_form": update_form,
             }
-    except ObjectDoesNotExist:
-        return redirect("employer_profile")
 
     return render(request, "profile.html", context)
+
 
 
 def employers_page(request):
@@ -179,7 +225,6 @@ def employers_page(request):
     context = {
         "page_title": "Employers",
     }
-
     return render(request, "employers.html", context)
 
 
@@ -188,5 +233,4 @@ def candidates_page(request):
     context = {
         "page_title": "Candidates",
     }
-
     return render(request, "candidates.html", context)

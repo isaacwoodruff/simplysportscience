@@ -1,8 +1,10 @@
 {% extends 'base.html' %}
+
 {% block upper_page_wrapper_id %}{% endblock %}
 {% block body_class %}class="sign-in-bg"{% endblock %}
 
 {% block content %}
+
 <div class="row pt-5 text-center">
     <div class="col col-10 offset-1 col-md-8 offset-md-2 col-lg-6 offset-lg-3 p-4 mt-5 bg-light b-radius-10">
         <h3>You have successfully logged out.</h3>
@@ -10,4 +12,5 @@
         <a class="btn btn-outline-info" href="{% url 'jobs' %}">Click Here</a>
     </div>
 </div>
+
 {% endblock %}

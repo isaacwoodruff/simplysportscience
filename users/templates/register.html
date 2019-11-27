@@ -1,31 +1,40 @@
 {% extends 'base.html' %}
-{% block body_class %}class="sign-in-bg"{% endblock %}
 {% load crispy_forms_tags %}
-{% block content %}
+
+{% block body_class %}class="sign-in-bg"{% endblock %}
 {% block upper_page_wrapper_id %}{% endblock %}
 
+{% block content %}
+
 <div class="row">
+
         <div class="col col-10 offset-1 col-md-8 offset-md-2 col-lg-6 offset-lg-3 p-4 bg-light b-radius-10">
+
             <div class="row mb-4">
                 <div class="col col-12 text-center">
                     <h3>Sign Up</h3>
                     <p class="text-secondary">Ready to discover some amazing opportunities?</p>
                 </div>
             </div>
+
             <div class="row">
+
                 <div class="col col-6 text-center">
                     <a class="btn btn-outline-info" href="{% url 'register_candidate' %}">I'm a Candidate</a>
                     {% if page_title == "For Candidates" %}
                         <hr class="hr-active" />
                     {% endif %}
                 </div>
+
                 <div class="col col-6 text-center">
                     <a class="btn btn-outline-info" href="{% url 'register_employer' %}">I'm an Employer</a>
                     {% if page_title == "For Employers" %}
                         <hr class="hr-active" />
                     {% endif %}
                 </div>
+
             </div>
+
             <div class="row">
                 <div class="col col-12">
                     <form method="POST">
@@ -38,6 +47,9 @@
                     </form>
                 </div>
             </div>
+            
         </div>
+
     </div>
+    
 {% endblock %}
