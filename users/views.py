@@ -8,6 +8,9 @@ from django.contrib.auth import authenticate, login
 
 
 '''
+If the form is valid on submition a query is made to check if the email/username
+exists. If it does then a warning message is sent and the form isn't saved.
+
 The employer registration view takes the forms value of the email field
 and assigns it to the hidden username field.
 
@@ -23,24 +26,28 @@ def register_employer(request):
     if request.method == "POST":
         form = user_forms.EmployerRegistrationForm(request.POST)
         if form.is_valid():
-            form_obj = form.save(commit=False)
-            form_obj.username = form.cleaned_data.get("email")
-            form_obj.save()
+            if User.objects.filter(username=form.cleaned_data['username']).exists():
+                messages.warning(
+                    request, "E-mail is already registered!")
+            else:
+                form_obj = form.save(commit=False)
+                form_obj.username = form.cleaned_data.get("email")
+                form_obj.save()
 
-            profile = User.objects.filter(
-                username=form_obj.username).first().employerprofile
-            profile.is_employer = True
-            profile.company_name = form.cleaned_data.get("company_name")
-            profile.save()
+                profile = User.objects.filter(
+                    username=form_obj.username).first().employerprofile
+                profile.is_employer = True
+                profile.company_name = form.cleaned_data.get("company_name")
+                profile.save()
 
-            messages.success(
-                request, "Success! Your account has been created.")
+                messages.success(
+                    request, "Success! Your account has been created.")
 
-            new_user = authenticate(username=form.cleaned_data["email"],
-                                    password=form.cleaned_data['password1'],
-                                    )
-            login(request, new_user)
-            return redirect("logged_user_type")
+                new_user = authenticate(username=form.cleaned_data["email"],
+                                        password=form.cleaned_data['password1'],
+                                        )
+                login(request, new_user)
+                return redirect("logged_user_type")
     else:
         form = user_forms.EmployerRegistrationForm()
 
@@ -59,25 +66,29 @@ def register_candidate(request):
     if request.method == "POST":
         form = user_forms.CandidateRegistrationForm(request.POST)
         if form.is_valid():
-            form_obj = form.save(commit=False)
-            form_obj.username = form.cleaned_data.get("email")
-            form_obj.save()
+            if User.objects.filter(username=form.cleaned_data['username']).exists():
+                messages.warning(
+                    request, "E-mail is already registered!")
+            else:
+                form_obj = form.save(commit=False)
+                form_obj.username = form.cleaned_data.get("email")
+                form_obj.save()
 
-            profile = User.objects.filter(
-                username=form_obj.username).first().candidateprofile
-            profile.is_candidate = True
-            profile.first_name = form.cleaned_data.get("first_name")
-            profile.last_name = form.cleaned_data.get("last_name")
-            profile.save()
+                profile = User.objects.filter(
+                    username=form_obj.username).first().candidateprofile
+                profile.is_candidate = True
+                profile.first_name = form.cleaned_data.get("first_name")
+                profile.last_name = form.cleaned_data.get("last_name")
+                profile.save()
 
-            messages.success(
-                request, "Success! Your account has been created.")
+                messages.success(
+                    request, "Success! Your account has been created.")
 
-            new_user = authenticate(username=form.cleaned_data["email"],
-                                    password=form.cleaned_data['password1'],
-                                    )
-            login(request, new_user)
-            return redirect("logged_user_type")
+                new_user = authenticate(username=form.cleaned_data["email"],
+                                        password=form.cleaned_data['password1'],
+                                        )
+                login(request, new_user)
+                return redirect("logged_user_type")
     else:
         form = user_forms.CandidateRegistrationForm()
 
