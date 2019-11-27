@@ -75,7 +75,7 @@ def login_view(request):
         form = user_forms.LoginForm(request.POST)
         if form.is_valid():
             user = authenticate(username=form.cleaned_data["email"],
-                                    password=form.cleaned_data['password'],
+                                password=form.cleaned_data['password'],
                                 )
             if user:
                 login(request, user)
@@ -92,6 +92,7 @@ def login_view(request):
     }
     return render(request, "login.html", context)
 
+
 def logged_user_type(request):
     try:
         request.user.employerprofile
@@ -107,27 +108,66 @@ def logged_user_type(request):
 def employer_profile(request):
     try:
         request.user.employerprofile
-        update_form = user_forms.EmployerUpdateForm()
-        profile_form = user_forms.EmployerProfileUpdateForm()
 
-        context = {
-            "update_form": update_form,
-            "profile_form": profile_form,
-        }
+        if request.method == "POST":
+            update_form = user_forms.EmployerUpdateForm(
+                data=request.POST, instance=request.user)
+            profile_form = user_forms.EmployerProfileUpdateForm(
+                data=request.POST, instance=request.user.employerprofile)
+            if update_form.is_valid() and profile_form.is_valid():
+                u_form = update_form.save(commit=False)
+                u_form.username = update_form.cleaned_data.get("email")
+                u_form.save()
+                profile_form.save()
+
+                messages.success(
+                    request, "Your profile has been updated.")
+
+                context = {
+                    "update_form": update_form,
+                    "profile_form": profile_form,
+                }
+                return render(request, "profile.html", context)
+        else:
+            update_form = user_forms.EmployerUpdateForm(instance=request.user)
+            profile_form = user_forms.EmployerProfileUpdateForm(
+                instance=request.user.employerprofile)
+
+            context = {
+                "update_form": update_form,
+                "profile_form": profile_form,
+            }
     except ObjectDoesNotExist:
         return redirect("candidate_profile")
 
     return render(request, "profile.html", context)
 
+
 @login_required
 def candidate_profile(request):
     try:
         request.user.candidateprofile
-        update_form = user_forms.CandidateUpdateForm()
 
-        context = {
-            "update_form": update_form,
-        }
+        if request.method == "POST":
+            update_form = user_forms.CandidateUpdateForm(
+                data=request.POST, instance=request.user)
+            if update_form.is_valid():
+                u_form = update_form.save(commit=False)
+                u_form.username = update_form.cleaned_data.get("email")
+                u_form.save()
+
+                messages.success(
+                    request, "Your profile has been updated.")
+
+                context = {
+                    "update_form": update_form,
+                }
+                return render(request, "profile.html", context)
+        else:
+            update_form = user_forms.CandidateUpdateForm(instance=request.user)
+            context = {
+                "update_form": update_form,
+            }
     except ObjectDoesNotExist:
         return redirect("employer_profile")
 
