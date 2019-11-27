@@ -1,3 +1,4 @@
+from datetime import datetime
 from django.db import models
 from django.utils import timezone
 from django.urls import reverse
@@ -46,6 +47,13 @@ class Job(models.Model):
 
     def __str__(self):
         return self.title + " - " + self.employer
+
+    '''Gets the amount of days ago that the post was created'''
+    def days_since_creation(self):
+        current_time = datetime.now()
+        if self.created_date.month == current_time.month:
+            return str(current_time.day - self.created_date.day) + " days ago"
+        return self.created_date.strftime("%b %d")
 
     '''Generates the url for the job post with its slug'''
     def get_absolute_url(self):
