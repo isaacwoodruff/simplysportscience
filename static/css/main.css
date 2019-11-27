@@ -7,37 +7,12 @@ body h1, h2, h3, h4, h5, h6 {
     font-family: 'Fugaz One', cursive;
 }
 
-.sign-in-bg {
-    background-image: url("https://i.ibb.co/D8V02Ls/coffee-work-table-phone.jpg");
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: top;
-}
-
-.job-details-bg {
-    background-image: url("https://images.pexels.com/photos/933054/pexels-photo-933054.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940");
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: top;
-}
-
-#can-emp-page-bg {
-    background-image: url("https://i.ibb.co/GxSRZHN/sky-background.jpg");
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
-}
-
 .navbar {
     z-index: 1;
 }
 
 .navbar-dark .navbar-nav .nav-link {
     color: #FFF;
-}
-
-.post-job-link {
-    padding: 0;
 }
 
 .navbar-nav .btn-outline-info {
@@ -56,6 +31,35 @@ body h1, h2, h3, h4, h5, h6 {
     color: #000;
 }
 
+.post-job-link {
+    padding: 0;
+}
+
+#navbar-bg-default {
+    background: #1ab7d0;
+}
+
+.sign-in-bg {
+    background-image: url("https://i.ibb.co/D8V02Ls/coffee-work-table-phone.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: top;
+}
+
+.job-details-bg {
+    background-image: url("https://i.ibb.co/7yXRt0x/mountain-bg-2.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: top;
+}
+
+#can-emp-page-bg {
+    background-image: url("https://i.ibb.co/GxSRZHN/sky-background.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
 #job-list-wrapper {
     background-image: url("https://i.ibb.co/cwL3K5W/jobs-banner.jpg");
     background-position: center;
@@ -65,15 +69,12 @@ body h1, h2, h3, h4, h5, h6 {
     min-height: 400px;
 }
 
-#navbar-bg-default {
-    background: #1ab7d0;
-}
-
 .job-post {
     box-shadow: 0 2px 2px -2px #807f7f;
     padding: 20px;
 }
 
+/* Aligns employer name correctly in job posts list */
 .job-post .row .col {
     padding-left: 30px;
 }
@@ -81,10 +82,6 @@ body h1, h2, h3, h4, h5, h6 {
 .job-post button {
     min-width: 6rem;
     min-height: 4rem;
-}
-
-.job-post .sticky-top {
-    top: 30vh;
 }
 
 .b-radius-50 {
@@ -117,9 +114,7 @@ body h1, h2, h3, h4, h5, h6 {
     height: 60px;
     padding: 6px 2px 8px 0;
     border-radius: 30px;
-    text-align: center;
     font-size: 12px;
-    line-height: 1.42857;
     margin-right: 2em;
 }
 
@@ -127,11 +122,10 @@ body h1, h2, h3, h4, h5, h6 {
     .btn-search {
         width: 100%;
     }
-
     .input-group .algolia-places {
         width: 100%;
     }
-
+    /* This styles the bootstrap-select dropdown menu to be full width on screens below 768px wide */
     .input-group-append .bootstrap-select:not([class*="col-"]):not([class*="form-control"]):not(.input-group-btn) {
         max-width: 100%;
         width: 100%;
@@ -140,7 +134,7 @@ body h1, h2, h3, h4, h5, h6 {
 
 @media (max-width: 991px) {
     .btn-circle {
-       margin-left: 0;
-       margin-right: 0;
+        margin-left: 0;
+        margin-right: 0;
     }
 }
