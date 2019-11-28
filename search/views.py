@@ -101,19 +101,20 @@ def location_job_list(request):
 
 '''
 Finds all jobs in database by what user is typing and sends json data to suggest
-an autocomplete for job title search
+an autocomplete for job title search. The set() method removes duplicates.
 '''
 def autocomplete_title_search(request):
     if request.is_ajax():
         job_query = request.GET.get('term', '')
         titles = Job.objects.filter(
             Q(title__istartswith=job_query) | Q(title__icontains=job_query)
-        )
+        ).distinct()
         result = []
         for title in titles:
             title_json = title.title
             result.append(title_json)
-        data = json.dumps(result)
+        unique_list = list(set(result))
+        data = json.dumps(unique_list)
         mimetype = 'application/json'
     return HttpResponse(data, mimetype)
 
