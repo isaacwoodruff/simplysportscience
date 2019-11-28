@@ -24,8 +24,8 @@ def checkout_view(request):
             'currency': 'eur',
             'quantity': 1,
         }],
-        success_url='https://simplysportscience.herokuapp.com/jobs/new-job/',
-        cancel_url='https://simplysportscience.herokuapp.com/jobs/search/',
+        success_url='https://simplysportscience.herokuapp.com/payment-success/',
+        cancel_url='https://simplysportscience.herokuapp.com/payment-failed/',
     )
     session_id = session.id
 
@@ -68,3 +68,10 @@ def webhook_view(request):
         credit_user(customer_email)
 
     return HttpResponse(status=200)
+
+
+def success_view(request):
+    render(request, "payment-status.html", {"payment_status": "Payment Success"})
+
+def fail_view(request):
+    render(request, "payment-status.html", {"payment_status": "Payment Failed"})
