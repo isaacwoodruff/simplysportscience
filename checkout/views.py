@@ -1,7 +1,9 @@
 import stripe
+import json
 from django.conf import settings
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, HttpResponse
 from django.contrib.auth.decorators import login_required
+from django.views.decorators.csrf import csrf_exempt
 
 
 stripe.api_key = settings.STRIPE_SECRET
@@ -30,9 +32,27 @@ def checkout_view(request):
     }
     return render(request, "checkout.html", context)
 
+
 @login_required
 def credit_view(request):
     profile = request.user.employerprofile
     profile.credits += 1
     profile.save()
     return redirect("new_job")
+
+
+@csrf_exempt
+def webhook_view(request):
+    if request.method == "POST":
+        payload = request.body
+        event = None
+
+        try:
+            event = stripe.Event.construct_from(
+                json.loads(payload), stripe.api_key
+            )
+        except ValueError as e:
+            return HttpResponse(status=400)
+
+        if event.type == 'checkout.session.succeeded':
+            return HttpResponse(status=200)
