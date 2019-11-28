@@ -63,7 +63,7 @@ def webhook_view(request):
     # Handle the checkout.session.completed event
     if event['type'] == 'checkout.session.completed':
         session = event['data']['object']
-        customer_email = session['customer']
+        customer_email = session['client_reference_id']
         credit_user(customer_email)
 
     return HttpResponse(status=200)
