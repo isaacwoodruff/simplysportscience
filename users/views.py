@@ -26,7 +26,7 @@ def register_employer(request):
     if request.method == "POST":
         form = user_forms.EmployerRegistrationForm(request.POST)
         if form.is_valid():
-            if User.objects.filter(username=form.cleaned_data['username']).exists():
+            if User.objects.filter(username=form.cleaned_data['email']).exists():
                 messages.warning(
                     request, "E-mail is already registered!")
             else:
@@ -66,7 +66,7 @@ def register_candidate(request):
     if request.method == "POST":
         form = user_forms.CandidateRegistrationForm(request.POST)
         if form.is_valid():
-            if User.objects.filter(username=form.cleaned_data['username']).exists():
+            if User.objects.filter(username=form.cleaned_data['email']).exists():
                 messages.warning(
                     request, "E-mail is already registered!")
             else:
@@ -245,3 +245,26 @@ def candidates_page(request):
         "page_title": "Candidates",
     }
     return render(request, "candidates.html", context)
+
+
+def delete_user_view(request):
+    if request.method == "POST":
+        form = user_forms.LoginForm(request.POST)
+        if form.is_valid():
+            user = authenticate(username=form.cleaned_data["email"],
+                                password=form.cleaned_data['password'],
+                                )
+            if user:
+                request.user.delete()
+                messages.success(request, "Your account has been deleted")
+                return redirect("jobs")
+            else:
+                messages.warning(request, "Your password/email is incorrect")
+    else:
+        form = user_forms.LoginForm()
+
+    context = {
+        "form": form,
+        "page_title": "Delete Account",
+    }
+    return render(request, "delete.html", context)

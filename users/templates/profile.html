@@ -13,7 +13,10 @@
             {% csrf_token %}
             {{ update_form | crispy }}
             {{ profile_form | crispy }}
-            <button class="btn btn-info" type="submit">Update</button>
+            <div class="d-flex justify-content-between">
+                <button class="btn btn-info" type="submit">Update</button>
+                <a class="btn btn-danger" href="{% url 'delete_user_view' %}" type="submit">Delete</a>
+            </div>
         </form>
     </div>
 </div>

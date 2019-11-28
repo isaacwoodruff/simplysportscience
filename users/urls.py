@@ -12,4 +12,5 @@ urlpatterns = [
     path('profile-redirect/', user_views.logged_user_type, name="logged_user_type"),
     path('employer-profile/', user_views.employer_profile, name="employer_profile"),
     path('candidate-profile/', user_views.candidate_profile, name="candidate_profile"),
+    path('delete-account/', user_views.delete_user_view, name="delete_user_view"),
 ]
