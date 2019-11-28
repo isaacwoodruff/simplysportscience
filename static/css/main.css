@@ -118,7 +118,7 @@ body h1, h2, h3, h4, h5, h6 {
     margin-right: 2em;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 767px) {
     .btn-search {
         width: 100%;
     }
