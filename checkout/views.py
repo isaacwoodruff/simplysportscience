@@ -35,5 +35,4 @@ def credit_view(request):
     profile = request.user.employerprofile
     profile.credits += 1
     profile.save()
-    print(profile.credits)
     return redirect("new_job")

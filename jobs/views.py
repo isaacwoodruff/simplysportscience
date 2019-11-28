@@ -19,7 +19,7 @@ def job_details(request, pk, slug=""):
     return render(request, "job-details.html", context)
 
 '''
-Creates a new job post for a logged in user who is an employer.
+If an employer has credits this creates a new job post.
 Assigns the hidden form field 'employer' the company_name of the current user.
 Creates a slug for the hidden slug field from the form title.
 After saving it finds the new job post in the database and redirects to it.
@@ -29,7 +29,9 @@ Algolia keys are for the Algolia API location autofill field in the form
 def new_job(request):
     if request.method == "POST":
         form = JobPostForm(request.POST)
-        if form.is_valid():
+        profile = request.user.employerprofile
+
+        if form.is_valid() and profile.credits > 0:
             form_obj = form.save(commit=False)
             employer_user = request.user.employerprofile
             form_obj.employer = employer_user.company_name
@@ -40,8 +42,14 @@ def new_job(request):
             messages.success(
                 request, "Success! Your new job post has been created.")
 
+            profile.credits -= 1
+            profile.save()
+
             new_job_object = Job.objects.get(pk=form_obj.pk)
             return redirect(new_job_object)
+        else:
+            messages.warning(
+                request, "You don't have any credits! Click Buy More at the bottom of the page.")
     else:
         form = JobPostForm()
 
