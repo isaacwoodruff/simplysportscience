@@ -38,9 +38,9 @@ def checkout_view(request):
 
 
 def credit_user(customer_email):
-    profile = User.objects.get(email__iexact=customer_email)
-    profile.credits += 1
-    profile.save()
+    user = User.objects.get(email__iexact=customer_email)
+    user.employerprofile.credits += 1
+    user.employerprofile.save()
 
 
 @csrf_exempt
