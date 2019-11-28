@@ -59,10 +59,8 @@ def webhook_view(request):
         # Invalid signature
         return HttpResponse(status=400)
 
-    # Handle the event
-    if event.type == 'checkout.session.completed':
-        print('Checkout session was successful!')
-    else:
-        # Unexpected event type
-        return HttpResponse(status=400)
+    # Handle the checkout.session.completed event
+    if event['type'] == 'checkout.session.completed':
+        session = event['data']['object']
+
     return HttpResponse(status=200)
