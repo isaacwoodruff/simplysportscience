@@ -5,18 +5,18 @@ from django.dispatch import receiver
 from django.urls import reverse
 
 
-'''
-The EmployerProfile model has a slug field which is used in the search app along with the
-primary key for the url that displays all the jobs from the employer
-'''
 class EmployerProfile(models.Model):
+    '''
+    The EmployerProfile model has a slug field which is used in the search app along with the
+    primary key for the url that displays all the jobs from the employer
+    '''
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     is_employer = models.BooleanField(default=True)
     is_candidate = models.BooleanField(default=False)
     company_name = models.CharField(max_length=200)
     credits = models.IntegerField(default=0)
 
-    slug = models.SlugField(default="")
+    slug = models.SlugField(blank=True, null=True)
 
     def __str__(self):
         return f"{self.company_name} Profile"
@@ -36,12 +36,12 @@ class CandidateProfile(models.Model):
         return f"{self.first_name} {self.last_name} Profile"
 
 
-'''
-When a User object is created or updated this receiver function creates or updates
-a user (employer or candidate) profile object
-'''
 @receiver(post_save, sender=User)
 def create_or_update_user_profile(sender, instance, created, **kwargs):
+    '''
+    When a User object is created or updated this receiver function creates or updates
+    a user (employer or candidate) profile object
+    '''
     if instance.first_name != "":
         if created:
             CandidateProfile.objects.create(user=instance)
