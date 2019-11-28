@@ -70,7 +70,7 @@ def webhook_view(request):
 
 
 def success_view(request):
-    render(request, "payment-status.html", {"payment_status": "Payment Success"})
+    return render(request, "payment-status.html", {"payment_status": "Payment Success"})
 
 def fail_view(request):
-    render(request, "payment-status.html", {"payment_status": "Payment Failed"})
+    return render(request, "payment-status.html", {"payment_status": "Payment Failed"})
