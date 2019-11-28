@@ -34,6 +34,7 @@ def new_job(request):
         if form.is_valid() and profile.credits > 0:
             form_obj = form.save(commit=False)
             employer_user = request.user.employerprofile
+            form_obj.employer_fk = employer_user
             form_obj.employer = employer_user.company_name
 
             form_obj.slug = slugify(form.cleaned_data.get("title"))
