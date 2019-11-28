@@ -14,7 +14,7 @@
             <div class="d-flex align-items-baseline justify-content-between">
                 <button class="btn btn-outline-info" type="submit">Create Job Post</button>
                 <p class="text-light">{{ request.user.employerprofile.credits }} Credits</p>
-                <a href="{% url 'checkout' %}" class="btn btn-outline-info">Buy More</a>
+                <a href="{% url 'checkout' %}" target="_blank" class="btn btn-outline-info">Buy More</a>
             </div>
         </form>
     </div>
