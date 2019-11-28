@@ -4,6 +4,7 @@ from django.conf import settings
 from django.shortcuts import render, redirect, HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
+from django.contrib.auth.models import User
 
 
 stripe.api_key = settings.STRIPE_SECRET
@@ -13,7 +14,9 @@ ENDPOINT_SECRET = settings.ENDPOINT_SECRET
 
 @login_required
 def checkout_view(request):
+    customer = request.user.email
     session = stripe.checkout.Session.create(
+        customer=customer,
         payment_method_types=['card'],
         line_items=[{
             'name': 'Job Post',
@@ -21,7 +24,7 @@ def checkout_view(request):
             'currency': 'eur',
             'quantity': 1,
         }],
-        success_url='https://simplysportscience.herokuapp.com/checkout/router/',
+        success_url='https://simplysportscience.herokuapp.com/jobs/new-job/',
         cancel_url='https://simplysportscience.herokuapp.com/jobs/search/',
     )
     session_id = session.id
@@ -35,11 +38,10 @@ def checkout_view(request):
 
 
 @login_required
-def credit_view(request):
-    profile = request.user.employerprofile
+def credit_user(customer_email):
+    profile = User.objects.get(email__iexact=customer_email)
     profile.credits += 1
     profile.save()
-    return redirect("new_job")
 
 
 @csrf_exempt
@@ -62,5 +64,7 @@ def webhook_view(request):
     # Handle the checkout.session.completed event
     if event['type'] == 'checkout.session.completed':
         session = event['data']['object']
+        customer_email = session['customer']
+        credit_user(customer_email)
 
     return HttpResponse(status=200)
