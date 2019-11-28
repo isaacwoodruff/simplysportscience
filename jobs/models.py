@@ -14,12 +14,14 @@ class Job(models.Model):
     CONTRACT = 'Contract'
     INTERNSHIP = 'Internship'
     APPRENTICESHIP = 'Apprenticeship'
+    VOLUNTEER = 'Volunteer'
     EMPLOYMENT_TYPE_CHOICES = (
         (FULL_TIME, 'Full Time'),
         (PART_TIME, 'Part Time'),
         (CONTRACT, 'Contract'),
         (INTERNSHIP, 'Internship'),
         (APPRENTICESHIP, 'Apprenticeship'),
+        (VOLUNTEER, 'Volunteer'),
     )
 
     employment_type = models.CharField(max_length=50,
@@ -29,8 +31,8 @@ class Job(models.Model):
     employer_fk = models.ForeignKey(
         EmployerProfile, on_delete=models.CASCADE, null=True)
     title = models.CharField(max_length=200)
-    description = models.TextField(default="")
-    requirements = models.TextField(default="")
+    description = models.TextField(blank=True, null=True)
+    requirements = models.TextField(blank=True, null=True)
     location = models.CharField(max_length=100)
     employer = models.CharField(max_length=200)
     views = models.IntegerField(default=0)
@@ -39,17 +41,21 @@ class Job(models.Model):
                                           null=True,
                                           default=timezone.now)
 
-    slug = models.SlugField(default="")
+    slug = models.SlugField(blank=True, null=True)
 
-    '''Ordering is set by the date created descending to give the newest results'''
     class Meta:
+        '''
+        Ordering is set by the date created descending to give the newest results
+        '''
         ordering = ['-created_date']
 
     def __str__(self):
         return self.title + " - " + self.employer
 
-    '''Gets the amount of days ago that the post was created'''
     def days_since_creation(self):
+        '''
+        Gets the amount of days ago that the post was created
+        '''
         current_time = datetime.now()
         if self.created_date.month == current_time.month:
             days_since = str(current_time.day - self.created_date.day)
@@ -57,9 +63,11 @@ class Job(models.Model):
             if days_since == 0 or days_since == "0":
                 return "Posted Today"
             else:
-                return  days_since + " days ago"
+                return days_since + " days ago"
         return self.created_date.strftime("%b %d")
 
-    '''Generates the url for the job post with its slug'''
     def get_absolute_url(self):
+        '''
+        Generates the url for the job post with its slug
+        '''
         return reverse('job_details', kwargs={'pk': self.pk, 'slug': self.slug})
