@@ -1,5 +1,5 @@
 from django.urls import path
-from checkout.views import checkout_view, credit_view, webhook_view
+from checkout.views import checkout_view, webhook_view
 from django.views.decorators.csrf import csrf_exempt
 
 urlpatterns = [
