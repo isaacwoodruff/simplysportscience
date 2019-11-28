@@ -37,7 +37,6 @@ def checkout_view(request):
     return render(request, "checkout.html", context)
 
 
-@login_required
 def credit_user(customer_email):
     profile = User.objects.get(email__iexact=customer_email)
     profile.credits += 1
