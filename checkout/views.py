@@ -14,9 +14,9 @@ ENDPOINT_SECRET = settings.ENDPOINT_SECRET
 
 @login_required
 def checkout_view(request):
-    customer = request.user.email
+    user = request.user.email
     session = stripe.checkout.Session.create(
-        customer=customer,
+        client_reference_id=user,
         payment_method_types=['card'],
         line_items=[{
             'name': 'Job Post',
