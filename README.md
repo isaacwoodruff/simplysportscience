@@ -278,6 +278,7 @@ For information on how to set these up, you can explore their documentation in t
         "EMAIL_HOST_USER": "<enter email here>",
         "EMAIL_PASS": "<enter app password here>",
     }
+
 12. Migrate all the models to create your database tables with the terminal command(for windows):
     ```
     python manage.py migrate
@@ -314,13 +315,94 @@ For information on how to set these up, you can explore their documentation in t
 8. Once created navigate to **Signing secret** and click on **Click to reveal**.
 
 9. Copy this key and put it as the value for your environment variable:
-    ```
-    "ENDPOINT_SECRET": "<enter signing secret key here>",
-    ```
+
+    ```json
+    { "ENDPOINT_SECRET": "<enter signing secret key here>" }
 
 10. Your Stripe Webhook is now set up to securely add credit to your users accounts.
 
+#### Password Reset Feature Instructions
+**Note:** These instructions are only for setting up a Gmail account to allow SMTP for the Password Reset feature.
+
+1. In your Gmail navigate to your account settings or click (this link)[https://myaccount.google.com/].
+
+2. From the side menu to the left click on **Security**.
+
+3. Navigate to the **Signing in to Google** section. If you have't got 2 step verification set up, click on **2 step verification** to set it up.
+
+4. Click on **App passwords**. From the **select app** dropdown select **Mail**. From the **select device** dropdown select **Other (Custom name)** and enter a name for your app. Then click generate.
+
+5. Copy the password and put it into your environment variable:
+    ```json
+    { "EMAIL_PASS": "<enter app password here>" }
+
+**Note:** Be careful not to leave out the spaces in this password as they dont get copied to your clipboard when you copy and paste.
+
 ## Heroku Deployment
+1. In your terminal create a **requirements.txt** file using the command:
+    ```
+    pip freeze --local > requirements.txt
+    ```
+
+2. Then create a **Procfile** with the terminal command:
+    ```
+    echo web: gunicorn django_todo.wsgi:application > Procfile
+    ```
+
+3. Commit your changes and push to GitHub with the terminal commands:
+
+    ```Note: set your GitHub remote to origin if not done already```
+    
+    ```
+    git add requirements.txt Procfile
+    ```
+    
+    ```
+    git commit -m "Your commit message"
+    ```
+    
+    ```
+    git push origin
+    ```
+    
+3. Go to [Heroku](https://heroku.com/) and create a new app by clicking the **New** button in your dashboard. Set your app name and set the region to whichever is closest to you for optimum speed.
+
+4. In the heroku dashboard navigate to **Installed add-ons** then click on **configure add-ons** next to it.
+
+5. Search for **Postgres** in the Add-ons search box and select it from the list.
+
+6. Select hobby-dev free model. Once set up you will have an environment variable in your config with the **DATABASE_URL**.
+
+7. In the heroku dashboard of your application, click on **Deploy** then **Deployment method** and select GitHub.
+
+8. Click confirm in the pop up window to link the heroku app to the GitHub repository.
+
+9. In the heroku dashboard of your application, click on **Settings** then **Reveal Config Vars** and set the following:
+
+| Key | Value |
+--- | ---
+HOSTNAME | `<your heroku app hostname>`
+DATABASE_URL | `<your postgres database url>`
+STRIPE_PUBLISHABLE | `<your public key>`
+STRIPE_SECRET | `<your secret key>`
+SECRET_KEY | `<your secret key>`
+ALGOLIA_PUBLIC_KEY | `<your public key>`
+ALGOLIA_PUBLIC_APP_ID | `<your secret key>`
+ENDPOINT_SECRET | `<your secret signing key here>`
+EMAIL_PASS | `<your secret key>`
+EMAIL_HOST_USER | `<your email address>`
+
+10. In your IDE open up a terminal and start a heroku shell. Then migrate your database models and create a superuser account in your database.
+    
+    You can find more in depth instructions on how to do those task in the [heroku documentation](https://devcenter.heroku.com/articles/heroku-postgresql).
+
+11. In the heroku dashboard of your app you can either click **Deploy** or enable **Automatic Deploys** in the **Automatic Deployment** section.
+
+12. To pick your branch for manual deployment go to the **Manual Deploy** section and set the branch to **master** then click **Deploy Branch**.
+
+13. After the build is complete you can navigate to the deployed site by clicking the **View app** button.
+
+14. To access the admin panel type **/admin** at the end of the heroku app URL.
 
 # Credits
 ### Content
