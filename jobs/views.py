@@ -1,14 +1,18 @@
 import os
+from django.http import JsonResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.template.defaultfilters import slugify
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from .models import Job
 from .forms import JobPostForm
+from django.contrib.auth.models import User
 
 '''
 Renders details of a specific job post
 '''
+
+
 def job_details(request, pk, slug=""):
     post = get_object_or_404(Job, pk=pk)
 
@@ -17,6 +21,7 @@ def job_details(request, pk, slug=""):
         "post": post,
     }
     return render(request, "job-details.html", context)
+
 
 '''
 If an employer has credits this creates a new job post.
@@ -61,3 +66,11 @@ def new_job(request):
         "ALGOLIA_PUBLIC_APP_ID": os.environ.get('ALGOLIA_PUBLIC_APP_ID'),
     }
     return render(request, "new-job.html", context)
+
+
+def credit_amount_view(request):
+    if request.is_ajax():
+        user = User.objects.get(username=request.user.username)
+        credit_amount = user.employerprofile.credits
+        data = {'result': 'success', 'credit_amount': credit_amount}
+    return JsonResponse(data)

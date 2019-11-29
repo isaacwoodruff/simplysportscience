@@ -7,7 +7,7 @@ $(document).ready(function () {
     function request_credit_score() {
 
         req = $.ajax({
-            url: '/update',
+            url: credit_amount_url,
         });
 
         req.done(function (data) {
