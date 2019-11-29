@@ -42,7 +42,10 @@
         apiKey: '{{ ALGOLIA_PUBLIC_KEY }}',
         container: document.querySelector('#address-input')
     });
+</script>
 
+<!-- ajax scripts to give feedback if credit is updated -->
+<script>
     const credit_amount_url = "{% url 'credit_amount_view' %}"
 </script>
 <script type="text/javascript" src="{% static 'js/main.js' %}"></script>

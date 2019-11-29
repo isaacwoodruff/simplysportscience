@@ -69,6 +69,10 @@ def new_job(request):
 
 
 def credit_amount_view(request):
+    '''
+    Takes ajax request and finds the logged user profile
+    Then sends the amount of credit that profile has as a JSON response for feedback to the user.
+    '''
     if request.is_ajax():
         user = User.objects.get(username=request.user.username)
         credit_amount = user.employerprofile.credits
