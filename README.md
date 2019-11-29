@@ -73,7 +73,7 @@ Mobile View
 ##### Job Search
 - The main component is the search feature for finding all jobs on the website with options to:
     - Filter by job title, location, type of employment (full time, part time, etc.)
-- The search features an autocomplete for job titles that pulls job titles from the database and suggest them to the user. This uses jQueryUI 
+- The search features an autocomplete for job titles that pulls job titles from the database and suggest them to the user. This uses jQuery UI 
 - The search also makes use of Algolia Places API in the location input to autocomplete city names from all over the world
 - Paginated results with 10 posts per page
 - The amount of days ago the job was posted
@@ -182,10 +182,38 @@ Mobile View
 
 # Technologies Used
 
-### Tools
-
 ### Programming Languages
 - This project uses **HTML**, **CSS**, **JavaScript** and **Python**.
+
+### Tools
+- [Django](https://www.djangoproject.com/) as a python web application framework for faster development.
+- [Django Crispy Forms](https://django-crispy-forms.readthedocs.io/en/latest/) to style django forms for speeding up design.
+- [Gunicorn](https://pypi.org/project/gunicorn/) a Python Web Server Gateway Interface HTTP server to aid in deployment of the Django project for heroku deployment.
+- [Psycopg2](https://pypi.org/project/psycopg2/) as a DB API 2.0 compliant PostgreSQL driver for Python.
+- [Whitenoise](http://whitenoise.evans.io/en/stable/) to allow the web app to serve its own static files.
+- [Visual Studio Code](https://code.visualstudio.com/) as the Integrated Development Environment while developing this project.
+- [PIP](https://pip.pypa.io/en/stable/installing/) to install the tools needed in this project.
+- [Stripe](https://stripe.com) as a payment gateway to validate and accept credit card payments securely.
+- [Algolia Places ](https://community.algolia.com/places/) to provide a fast and easy way to use address search autocomplete by harnessing OpenStreetMap's database.
+- [Git](https://git-scm.com) for version control during the development process. 
+- [GitHub](https://github.com/) for a remote repository.
+- [Travis](https://travis-ci.org/) for Continuous Integration.
+- [Heroku](https://www.heroku.com/) for hosting and deployment.
+- [Balsamiq](https://balsamiq.com/) to build wireframes in the planning stage of development.
+- [Google Chrome - Dev Tools](https://www.google.com/chrome/) to test responsiveness, to debug code by utilising breakpoints and the console, and to speed up the design process.
+- [AutoPrefixer](https://autoprefixer.github.io/) to add prefixes in the CSS for cross-browser support.
+- [Imgbb](https://imgbb.com) to store external images.
+
+### Databases
+- [PostgreSQL](https://www.postgresql.org/) as the database for the deployed site, hosted on Heroku.
+- [SQlite3](https://www.sqlite.org/index.html) as the database for development environment, provided by django.
+
+### Libraries
+- [JQuery](https://jquery.com) to simplify HTML DOM tree traversal and manipulation, event handling, and Ajax.
+- [JQuery UI](https://jqueryui.com/) to enables users to quickly find and select from a pre-populated list of values as they type, leveraging searching and filtering.
+- [Bootstrap](https://www.bootstrapcdn.com/) CSS Framework was used to develop responsive and mobile-first pages more easily.
+- [FontAwesome](https://www.bootstrapcdn.com/fontawesome/) a font and icon toolkit based on CSS used to provide icons for the project.
+- [Google Fonts](https://fonts.google.com/) to provide and style fonts for the project.
 
 # Testing
 ### Validation Tools
