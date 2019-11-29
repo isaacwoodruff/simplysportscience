@@ -6,15 +6,14 @@ $(document).ready(function () {
 
     function request_credit_score() {
 
-        req = $.ajax({
-            url: credit_amount_url,
-        });
-
-        req.done(function (data) {
+        $.ajax({
+            url: credit_amount_url
+        }).done(function (data) {
             $('#credit-num').text(data.credit_amount);
+            setTimeout(function(){
+                request_credit_score();
+            }, 5000);
         });
-
-        setTimeout(request_credit_score(), 5000);
     };
 
     request_credit_score();
