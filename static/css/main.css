@@ -71,7 +71,8 @@ body h1, h2, h3, h4, h5, h6 {
 
 .job-post {
     box-shadow: 0 2px 2px -2px #807f7f;
-    padding: 20px;
+    padding: 20px 0;
+    margin: 0 auto;
 }
 
 /* Aligns employer name correctly in job posts list */
