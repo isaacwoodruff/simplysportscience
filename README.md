@@ -68,6 +68,10 @@ Desktop View
 Mobile View
 - [Jobs Search Page](https://ibb.co/hdb58TG)
 
+# Information Architecture
+
+#### Users Collection
+
 # Features
 ## Existing Features
 ##### Job Search
@@ -176,10 +180,6 @@ Mobile View
 - Newsletter of newest jobs, and industry specific career advise
 - Easy one click applications (by uploading CV or filling out profile on signup)
 
-# Information Architecture
-
-#### Users Collection
-
 # Technologies Used
 
 ### Programming Languages
@@ -206,24 +206,119 @@ Mobile View
 
 ### Databases
 - [PostgreSQL](https://www.postgresql.org/) as the database for the deployed site, hosted on Heroku.
-- [SQlite3](https://www.sqlite.org/index.html) as the database for development environment, provided by django.
+- [SQlite3](https://www.sqlite.org/index.html) as the database for the development environment, provided by django.
 
 ### Libraries
 - [JQuery](https://jquery.com) to simplify HTML DOM tree traversal and manipulation, event handling, and Ajax.
 - [JQuery UI](https://jqueryui.com/) to enables users to quickly find and select from a pre-populated list of values as they type, leveraging searching and filtering.
-- [Bootstrap](https://www.bootstrapcdn.com/) CSS Framework was used to develop responsive and mobile-first pages more easily.
-- [FontAwesome](https://www.bootstrapcdn.com/fontawesome/) a font and icon toolkit based on CSS used to provide icons for the project.
+- [Bootstrap](https://www.bootstrapcdn.com/) to develop responsive and mobile-first pages more easily.
+- [FontAwesome](https://www.bootstrapcdn.com/fontawesome/) to provide icons for the project.
 - [Google Fonts](https://fonts.google.com/) to provide and style fonts for the project.
 
 # Testing
 ### Validation Tools
+These tools were used to test the validity of the code for this project:
+- [W3C HTML Validator]( https://validator.w3.org/) was used to validate HTML.
+- [W3C CSS validator](https://jigsaw.w3.org/css-validator/) was used to validate CSS.
+- [Pylint-django](https://pypi.org/project/pylint-django/) and [Microsofts Python Extension for VSCode](https://marketplace.visualstudio.com/items?itemName=ms-python.python) was used to validate Python.
 
 ### Testing Matrix
 
 # Deployment
 ## Local Deployment
+To run this project locally the following must be installed in your IDE:
+- [Git](https://git-scm.com/downloads)
+- [Python 3](https://www.python.org/downloads/)
+- [PIP](https://pip.pypa.io/en/stable/installing/)
+
+You have to set up free accounts with the following services for the site to function fully:
+- [Stripe](https://stripe.com/)
+- [Algolia Places](https://community.algolia.com/places/)
+
+For information on how to set these up, you can explore their documentation in the links above.
 
 ### Instructions
+
+1. Follow [this link](https://github.com/isaacwoodruff/simplysportscience/) to the main page of the Simply Sport Science repository.
+2. On the right side of the page click the green **Clone or download** button.
+3. In the '**Clone with HTTPS**' section, copy the URL for the repository.
+4. Open your **terminal/Git Bash**.
+5. Change the current working directory to the location where you want the cloned directory to be made.
+6. Type **git clone**, and then paste the URL that was copied in Step 3 or copy and paste this command:
+    ```
+    git clone https://github.com/isaacwoodruff/simplysportscience.git
+    ```
+    
+7. Press **Enter**.
+8. Create a virtual environment using Pythons built in virtual environment by entering the command(for Windows):
+    ```
+    python -m .venv venv
+    ```
+9. Activate the .venv with the command(for Windows):
+    ```
+    .venv\Scripts\activate 
+10. Install all required modules from requirements.txt with the command:
+    ```
+    pip install -r requirements.txt.
+    ```
+11. Set up your environment variables. 
+
+    - If you're using VSCode, locate the **settings.json** file in the .vscode directory and add your environment variables as below. Once saved you may have to restart VSCode to activate your environment variables: 
+
+    ```json
+    "terminal.integrated.env.windows": {
+        "SECRET_KEY": "<enter key here>",
+        "DEVELOPMENT": "1", # for development, dont include this in production
+        "HOSTNAME": "<enter hostname url here>",
+        "ALGOLIA_PUBLIC_KEY": "<enter key here>",
+        "ALGOLIA_PUBLIC_APP_ID": "<enter key here>",
+        "STRIPE_PUBLISHABLE": "<enter key here>",
+        "STRIPE_SECRET": "<enter key here>",
+        "ENDPOINT_SECRET": "<enter key here>",
+        "EMAIL_HOST_USER": "<enter email here>",
+        "EMAIL_PASS": "<enter app password here>",
+    }
+12. Migrate all the models to create your database tables with the terminal command(for windows):
+    ```
+    python manage.py migrate
+    ```
+13. To access the Django admin panel create a superuser with the following command(for windows):
+    ```
+    python manage.py createsuperuser
+    ```
+14. Now you can run the project locally with the command(for windows):
+    ```
+    python manage.py runserver
+    ```
+15. Click on the localhost link provided to navigate to the deployed site.
+
+16. To access the admin panel type **/admin** at the end of the localhost URL.
+
+#### Stripe Webhook Instructions
+1. To use webhooks for local development you will need to use [ngrok](https://ngrok.com/) to create a public URL for your localhost. Follow their documentation in the link provided to set it up.
+
+2. Assuming you created your Stripe account as suggested above navigate to your [Dashboard](https://dashboard.stripe.com/).
+
+3. On the side bar to the left click on **Developer**, then in the submenu slick on **Webhooks**.
+
+4. In the Endpoints section click on **Add endpoint**.
+
+5. Enter the endpoint URL which will be:
+    ```
+    https://<your ngrok url here>/checkout/router/
+    ```
+6. From the **Events to send** dropdown menu navigate to, and click on, **checkout.session.completed**. 
+
+7. Then click **Add endpoint** and enter your account password.
+
+8. Once created navigate to **Signing secret** and click on **Click to reveal**.
+
+9. Copy this key and put it as the value for your environment variable:
+    ```
+    "ENDPOINT_SECRET": "<enter signing secret key here>",
+    ```
+
+10. Your Stripe Webhook is now set up to securely add credit to your users accounts.
 
 ## Heroku Deployment
 
