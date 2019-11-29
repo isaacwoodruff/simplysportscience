@@ -3,6 +3,7 @@
 {% block upper_page_wrapper_id %}{% endblock %}
 {% block body_class %}class="job-details-bg"{% endblock %}
 {% load crispy_forms_tags %}
+{% load static %}
 
 {% block content %}
 <div class="row justify-content-center">
@@ -15,7 +16,7 @@
                 {{ new_job_form | crispy }}
                 <div class="d-flex align-items-baseline justify-content-between">
                     <button class="btn btn-outline-info" type="submit">Create Job Post</button>
-                    <p class="text-light">{{ request.user.employerprofile.credits }} Credits</p>
+                    <p class="text-light"><span id="credit-num">{{ request.user.employerprofile.credits }}</span> Credits</p>
                     <a href="{% url 'checkout' %}" target="_blank" class="btn btn-outline-info">Buy More</a>
                 </div>
             </form>
@@ -23,7 +24,7 @@
         {% elif request.user.candidateprofile %}
             <div class="text-center text-light my-5">
                 <h3>You have to create an employer account to post a job.</h3>
-                <a href="{% url 'register_employer' %}" target="_blank" class="btn btn-info m-4">Sign Up As Employer</a>
+                <a href="{% url 'register_employer' %}" class="btn btn-info m-4">Sign Up As Employer</a>
             </div>
         {% endif %}
     </div>
@@ -38,4 +39,6 @@
         container: document.querySelector('#address-input')
     });
 </script>
+
+<script type="text/javascript" src="{% static 'js/main.js' %}"></script>
 {% endblock %}
