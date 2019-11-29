@@ -70,6 +70,70 @@ Mobile View
 
 # Features
 ## Existing Features
+##### Job Search
+- The main component is the search feature for finding all jobs on the website with options to:
+    - Filter by job title, location, type of employment (full time, part time, etc.)
+- The search features an autocomplete for job titles that pulls job titles from the database and suggest them to the user. This uses jQueryUI 
+- The search also makes use of Algolia Places API in the location input to autocomplete city names from all over the world
+- Paginated results with 10 posts per page
+- The amount of days ago the job was posted
+- Posts containing job title, employement company, employment type, location
+- Each company name, location, and employment type is a tag that can be clicked to search for all jobs relating to the tag
+- A minimalist, professional design
+
+##### Employers Page
+- A list of reasons why employers would benefit from posting listings on the website
+- An option to sign up as an employer
+- If a candidate is viewing the page they also have an option to sign up as a candidate
+
+##### Candidates Page
+- A list of reasons why candidates would benefit from signing up to an account
+- An option to sign up as a candidate
+- If an employer is viewing the page they also have an option to sign up as an employer
+
+##### User Profile Page
+- Displays a form with user profile details. The form is autopopulated from their account in the database
+- The user has two options on the page. Update their profile or delete their account.
+
+##### Delete Account Page
+- Asks the user if they are sure they want to delete their profile
+- Requires the user to confirm with their email and password
+
+##### Sign Up Page
+- Shows a registration form with two buttons at the top to easily switch between employer and candidate registration
+- Has a link at the bottom that redirects to the sign in page if the user already has an account
+
+##### Sign In Page
+- Shows a sign in form with an encouraging message at the top
+- Has a link at the button to sign up if the user hasn't got an account
+- Has a forgot password option
+
+##### Job Details Page
+- Shows all the details of the job such as:
+    - Description
+    - Requirements
+    - Location
+    - Employer
+    - Employment type
+    - Contact info
+- A button at the bottom displays a modal with the contact details of the employer
+- A circular button with a back arrow navigates the user back to their previous page
+
+##### New Job Page
+- Displays a form to create a new job
+- Uses Algolia Places API to autocomplete on the location input for suggestions of cities worldwide
+- At the bottom of the page there is a button to post the new job. If the employer has credits then the job will be posted. If they don't have credits then they receive a warning telling them to buy more
+- Next to the post job button the amount of credits they have is displayed
+- There is a Buy More button next to the credit amount. This navigates to a page that redirects the user to Stripe Checkout's payment gateway.
+- Upon successful completion the user is redirected to the payment success page which tells the user it was successful
+
+##### Checkout
+- The checkout uses webhooks to confirm with Stripe API that the payment was successful
+- Stripe sends a checkout successful object with the session ID sent at time of payment
+- The client_reference_id is used to send the unique email attached to their account on our website to Stripe in the session object
+- When the session object is received by Simply Sport Science a function is called that uses the client_reference_id to uniquely identify the user and assign their account credit
+- A response is sent to Stripe to confirm that the webhook was received and to complete the payment
+
 
 ## Features Left To Implement
 ##### Home/Landing Page
@@ -79,27 +143,6 @@ Mobile View
     - A Call-To-Action for signing up to a newsletter and registering an account
     - Some companies that the website lists jobs for
     - A small selection of articles from the blog
-
-##### Job Search
-- The main component is the search feature for finding all jobs on the website with an option to:
-    - Filter by location, type of employment, or/and categories
-    - Save jobs to favourites list. If user hasn't got an account this leads to them signing up to use this feature
-    - Set alerts for a specific search parameter *e.g. biomechanist jobs in New York, US.*
-    - Apply for jobs without having registered an account. Their email can still be captured for newsletter
-- Call-To-Action for signing up to a newsletter and registering an account
-
-##### Employers Page
-- List reasons why employers would benefit from posting listings on the website
-- Access to candidate profile/CV database
-- Pricing packages for posting jobs
-- Sign up form
-
-##### Candidates Page
-- List reasons why candidates would benefit from signing up to an account, some are:
-    - Newsletter of newest jobs, and industry specific career advise
-    - Easy one click applications (by uploading CV or filling out profile on signup)
-    - Customized job alerts
-- Sign up form
 
 ##### Blog
 - A blog with:
@@ -126,6 +169,12 @@ Mobile View
     - Offer CV templates
     - View list of favourite/saved jobs
     - Links to career advise articles on the blog
+
+##### Miscellaneous Features
+- Set alerts for a specific search parameter *e.g. biomechanist jobs in New York, US.*
+- Save jobs to favourites list. If user hasn't got an account this leads to them signing up to use this feature
+- Newsletter of newest jobs, and industry specific career advise
+- Easy one click applications (by uploading CV or filling out profile on signup)
 
 # Information Architecture
 
