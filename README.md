@@ -7,18 +7,27 @@
 
 1. [UX](#ux)
     - [Goals](#goals)
-        - [Business Goals](#business-goals)
+        - [Business Goals](#simply-sport-science-goals)
         - [Employer Goals](#employer-goals)
         - [Candidate Goals](#candidate-goals)
     - [User Stories](#user-stories)
     - [Design Choices](#design-choices)
     - [Wireframes](#wireframes)
+    - [Information Architecture](#information-architecture)
 
 2. [Features](#features)
     - [Existing Features](#existing-features)
+        - [Job Search](#job-search)
+        - [Employers Page](#employers-page)
+        - [Candidates Page](#candidates-page)
+        - [User Profile Page](#user-profile-page)
+        - [Delete Account Page](#delete-account-page)
+        - [Sign Up Page](#sign-up-page)
+        - [Sign In Page](#sign-in-page)
+        - [Job Details Page](#job-details-page)
+        - [New Job Page](#new-job-page)
+        - [Checkout](#checkout)
     - [Features Left to Implement](#features-left-to-implement)
-
-3. [Information Architecture](#information-architecture)
 
 4. [Technologies Used](#technologies-used)
 
@@ -324,13 +333,13 @@ For information on how to set these up, you can explore their documentation in t
 #### Password Reset Feature Instructions
 **Note:** These instructions are only for setting up a Gmail account to allow SMTP for the Password Reset feature.
 
-1. In your Gmail navigate to your account settings or click (this link)[https://myaccount.google.com/].
+1. In your Gmail navigate to your account settings or click [this link](https://myaccount.google.com/).
 
 2. From the side menu to the left click on **Security**.
 
-3. Navigate to the **Signing in to Google** section. If you have't got 2 step verification set up, click on **2 step verification** to set it up.
+3. Navigate to the **Signing in to Google** section. If you have't got 2 step verification set up, click on **2 step verification** and follow the instructions to set it up.
 
-4. Click on **App passwords**. From the **select app** dropdown select **Mail**. From the **select device** dropdown select **Other (Custom name)** and enter a name for your app. Then click generate.
+4. Click on **App passwords**. From the **select app** dropdown menu select **Mail**. From the **select device** dropdown menu select **Other (Custom name)** and enter a name for your app. Then click generate.
 
 5. Copy the password and put it into your environment variable:
     ```json
@@ -346,12 +355,11 @@ For information on how to set these up, you can explore their documentation in t
 
 2. Then create a **Procfile** with the terminal command:
     ```
-    echo web: gunicorn django_todo.wsgi:application > Procfile
+    echo web: gunicorn <your app name>.wsgi:application > Procfile
     ```
 
 3. Commit your changes and push to GitHub with the terminal commands:
-
-    ```Note: set your GitHub remote to origin if not done already```
+***Note:*** set your GitHub remote to origin if not done already```
     
     ```
     git add requirements.txt Procfile
@@ -388,13 +396,13 @@ STRIPE_SECRET | `<your secret key>`
 SECRET_KEY | `<your secret key>`
 ALGOLIA_PUBLIC_KEY | `<your public key>`
 ALGOLIA_PUBLIC_APP_ID | `<your secret key>`
-ENDPOINT_SECRET | `<your secret signing key here>`
+ENDPOINT_SECRET | `<your secret signing key>`
 EMAIL_PASS | `<your secret key>`
 EMAIL_HOST_USER | `<your email address>`
 
 10. In your IDE open up a terminal and start a heroku shell. Then migrate your database models and create a superuser account in your database.
     
-    You can find more in depth instructions on how to do those task in the [heroku documentation](https://devcenter.heroku.com/articles/heroku-postgresql).
+    You can find more in depth instructions on how to do those tasks in the [heroku documentation](https://devcenter.heroku.com/articles/heroku-postgresql).
 
 11. In the heroku dashboard of your app you can either click **Deploy** or enable **Automatic Deploys** in the **Automatic Deployment** section.
 
