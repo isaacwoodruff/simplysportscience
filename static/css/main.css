@@ -137,6 +137,12 @@ footer {
     color: #FFF;
 }
 
+.btn-danger {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+
 .fa {
     padding: 10px;
     font-size: 25px;
