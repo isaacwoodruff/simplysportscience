@@ -30,6 +30,8 @@ class EmployerUpdateForm(forms.ModelForm):
 
 
 class EmployerProfileUpdateForm(forms.ModelForm):
+    slug = forms.SlugField(required=False)
+    slug.widget = slug.hidden_widget()
     class Meta:
         model = EmployerProfile
         fields = ["company_name"]

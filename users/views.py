@@ -33,13 +33,13 @@ def register_employer(request):
             else:
                 form_obj = form.save(commit=False)
                 form_obj.username = form.cleaned_data.get("email")
-                form_obj.slug = slugify(form.cleaned_data.get("company_name"))
                 form_obj.save()
 
                 profile = User.objects.filter(
                     username=form_obj.username).first().employerprofile
                 profile.is_employer = True
                 profile.company_name = form.cleaned_data.get("company_name")
+                profile.slug = slugify(form.cleaned_data.get("company_name"))
                 profile.save()
 
                 messages.success(
