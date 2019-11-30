@@ -45,7 +45,7 @@ The goal of this website is to create a job board to connect employers and candi
 
 ### Simply Sport Science Goals
 The goals of Simply Sport Science are to:
-- Create an efficient service to help the sport science community connect with employers/employees they want
+- Create an efficient service to help the sport science community connect with the employers/employees they want
 - Monetize the job board by offering job posting packages to potential employers
 
 The target audiences for this website are:
@@ -56,7 +56,7 @@ The target audiences for this website are:
 The goals of employers on the website are to:
 - Gain good exposure to the right candidates
 - Find a selection of quality candidates for job openings in their organisation
-- Have a dashboard to easily manage all their job posts
+- Have a dashboard to easily manage all of their job posts
 
 ### Candidate Goals
 The goals of candidates on the website are to:
@@ -90,14 +90,14 @@ Mobile View
 - The search also makes use of Algolia Places API in the location input to autocomplete city names from all over the world
 - Paginated results with 10 posts per page
 - The amount of days ago the job was posted
-- Posts containing job title, employement company, employment type, location
+- Posts containing job title, employment company, employment type, location
 - Each company name, location, and employment type is a tag that can be clicked to search for all jobs relating to the tag
 - A minimalist, professional design
 
 ##### Employers Page
 - A list of reasons why employers would benefit from posting listings on the website
 - An option to sign up as an employer
-- If a candidate is viewing the page they also have an option to sign up as a candidate
+- If a candidate is viewing this page they also have an option to sign up as a candidate
 
 ##### Candidates Page
 - A list of reasons why candidates would benefit from signing up to an account
@@ -118,8 +118,8 @@ Mobile View
 
 ##### Sign In Page
 - Shows a sign in form with an encouraging message at the top
-- Has a link at the button to sign up if the user hasn't got an account
-- Has a forgot password option
+- Has a link at the bottom to sign up if the user doesn't have an account
+- Has a 'Forgot Password' option
 
 ##### Job Details Page
 - Shows all the details of the job such as:
@@ -136,7 +136,7 @@ Mobile View
 - Displays a form to create a new job
 - Uses Algolia Places API to autocomplete on the location input for suggestions of cities worldwide
 - At the bottom of the page there is a button to post the new job. If the employer has credits then the job will be posted. If they don't have credits then they receive a warning telling them to buy more
-- Next to the post job button the amount of credits they have is displayed
+- The amount of credits they have is displayed next to the post job button
 - There is a Buy More button next to the credit amount. This navigates to a page that redirects the user to Stripe Checkout's payment gateway.
 - Upon successful completion the user is redirected to the payment success page which tells the user it was successful
 
@@ -181,12 +181,12 @@ Mobile View
     - Option to fill out profile or autopopulate profile from CV
     - Offer CV templates
     - View list of favourite/saved jobs
-    - Links to career advise articles on the blog
+    - Links to career advice articles on the blog
 
 ##### Miscellaneous Features
 - Set alerts for a specific search parameter *e.g. biomechanist jobs in New York, US.*
 - Save jobs to favourites list. If user hasn't got an account this leads to them signing up to use this feature
-- Newsletter of newest jobs, and industry specific career advise
+- Newsletter of newest jobs, and industry specific career advice
 - Easy one click applications (by uploading CV or filling out profile on signup)
 
 # Technologies Used
@@ -244,6 +244,7 @@ To run this project locally the following must be installed in your IDE:
 You have to set up free accounts with the following services for the site to function fully:
 - [Stripe](https://stripe.com/)
 - [Algolia Places](https://community.algolia.com/places/)
+- [Gmail](https://accounts.google.com/signup/)
 
 For information on how to set these up, you can explore their documentation in the links above.
 
