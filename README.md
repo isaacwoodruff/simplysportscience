@@ -479,6 +479,8 @@ EMAIL_HOST_USER | `<your email address>`
 ### Media
 - The banner image in the job search pages uses an image from [this location](https://www.pexels.com/photo/photo-of-people-doing-fist-bump-3184430/?fbclid=IwAR38WzHnwwOuL2VcxFMn879hwp7a81MHEk9mYuYkB5Bzj4K0mRpSADZuUUA)
 - The background image for sign in/sign up pages uses an image from [this location](https://www.pexels.com/photo/woman-writing-on-a-notebook-beside-teacup-and-tablet-computer-733856/?fbclid=IwAR1O-2oPVI040el3QIC9nsV3SAqNAidZxRPIBkTcR-FGBJmIGj_ftF5I3d4)
+- The background image for the employer & candidates pages uses an image from [this location](https://www.pexels.com/photo/photo-of-people-near-wooden-table-3184418/?fbclid=IwAR3jFa1w88s5IBy01lXtVE923ZYRgi2O0B9ZVM20ivUOdi-JX9ZBNvL-Mng)
+- The background image for the edit profile & new job pages uses an image from [this location](https://www.pexels.com/photo/adult-blur-books-close-up-261909/)
 - The favicon for this site is take from [Flaticon](https://www.flaticon.com/free-icon/gym_755298)
 
 ### Code
