@@ -483,6 +483,6 @@ EMAIL_HOST_USER | `<your email address>`
 - The CSS gradient for the instagram icon was taken from [Brand Gradients](http://www.brandgradients.com/instagram-colors/)
 
 ### Acknowledgements
-- [Corey Schafers] youtube [Django Tutorials](https://www.youtube.com/playlist?list=PL-osiE80TeTtoQCKZ03TU5fNfx2UY6U4p) helped me a lot in my understanding of Django.
+- [Corey Schafers](https://www.youtube.com/playlist?list=PL-osiE80TeTtoQCKZ03TU5fNfx2UY6U4p) youtube [Django Tutorials](https://www.youtube.com/playlist?list=PL-osiE80TeTtoQCKZ03TU5fNfx2UY6U4p) helped me a lot in my understanding of Django.
 - Thanks to [Aaron Sinnott](https://github.com/aaronsnig501) for his help and suggestions throughout the project
 - [SlackOverflow](https://stackoverflow.com/) was invaluable for understanding issues and bugs throughout the development of the project
