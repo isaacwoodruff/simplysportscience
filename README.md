@@ -95,8 +95,44 @@ Mobile View
 - [Jobs Search Page](https://ibb.co/hdb58TG)
 
 # Information Architecture
+- During the develoment phase of the project a SQlite3 database was used. This is the default that Django uses for local development.
+- The deployed site uses a PostgreSQL database. This is provided as an add-on in Heroku.
 
-#### Users Collection
+## Database Models
+#### User Model
+The User model for this project is the standard User model provided by Django.
+
+#### EmployerProfile Model
+Key in db | Validation | Field Type |
+--- | --- | ---
+user | User, on_delete=models.CASCADE | OneToOneField
+is_employer | default=True | BooleanField
+is_candidate | default=False | BooleanField
+company_name | max_length=200 | CharField
+credits | default=0 | IntegerField
+slug | blank=True, null=True | SlugField
+
+#### CandidateProfile Model
+Key in db | Validation | Field Type |
+--- | --- | ---
+user | User, on_delete=models.CASCADE | OneToOneField
+is_employer | default=True | BooleanField
+is_candidate | default=False | BooleanField
+first_name | max_length=100 | CharField
+last_name | max_length=100 | CharField
+
+#### Job Model
+Key in db | Validation | Field Type |
+--- | --- | ---
+title | max_length=200 | CharField
+employment_type | max_length=50, choices=EMPLOYMENT_TYPE_CHOICES, default=FULL_TIME | CharField
+requirements | blank=True, null=True | TextField
+location | max_length=100 | CharField
+employer | max_length=200 | CharField
+views | default=0 | IntegerField
+created_date | auto_now_add=True | DateTimeField
+published_date | blank=True, null=True, default=timezone.now | DateTimeField
+slug | blank=True, null=True | SlugField
 
 # Features
 ## Existing Features
