@@ -1,5 +1,5 @@
 # Simply Sport Science
-[Simply Sport Science](#https://simplysportscience.herokuapp.com/) was created as a job board to connect employers and candidates in the area of sport science.
+[Simply Sport Science](https://simplysportscience.herokuapp.com/) was created as a job board to connect employers and candidates in the area of sport science.
 
 [![Build Status](https://travis-ci.org/isaacwoodruff/simplysportscience.svg?branch=master)](https://travis-ci.org/isaacwoodruff/simplysportscience)
 
@@ -232,6 +232,7 @@ These tools were used to test the validity of the code for this project:
 - [Pylint-django](https://pypi.org/project/pylint-django/) and [Microsofts Python Extension for VSCode](https://marketplace.visualstudio.com/items?itemName=ms-python.python) was used to validate Python.
 
 ### Testing Matrix
+A testing matrix was created using google spreadsheets. It details all of the tests to make sure the site is responsive and that each feature and compenent works on different screen sizes, devices, and browsers. The testing matrix can be found [here](https://github.com/isaacwoodruff/simplysportscience/blob/master/Testing_Matrix.pdf).
 
 # Deployment
 ## Local Deployment
