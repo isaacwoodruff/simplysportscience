@@ -74,6 +74,14 @@ footer {
     min-height: 400px;
 }
 
+#explore-jobs-header {
+    max-width: 560px;
+}
+
+#explore-jobs-header p {
+    font-size: 1.1rem;
+}
+
 .job-post {
     box-shadow: 0 2px 2px -2px #807f7f;
     padding: 20px 0;
