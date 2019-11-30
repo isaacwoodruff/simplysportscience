@@ -110,9 +110,13 @@
 
         </main>
         
-        <footer>
+        <div class="position-relative">
+            <footer class="position-absolute bg-info">
 
-        </footer>
+                {% block footer %}{% endblock %}
+
+            </footer>
+        </div>
 
         <!-- jquery javascript -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>

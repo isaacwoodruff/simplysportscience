@@ -7,6 +7,11 @@ body h1, h2, h3, h4, h5, h6 {
     font-family: 'Fugaz One', cursive;
 }
 
+footer {
+    left: 0;
+    right: 0;
+}
+
 .navbar {
     z-index: 1;
 }
@@ -122,6 +127,32 @@ body h1, h2, h3, h4, h5, h6 {
 #pass-reset-conf li {
     color: #FFF;
 }
+
+.fa {
+    padding: 10px;
+    font-size: 25px;
+    width: 45px;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 50%;
+}
+
+.fa:hover {
+    opacity: 0.6;
+    text-decoration: none;
+    color: #000;
+}
+
+.fa-facebook {
+    background: #4B5897;
+    color: white;
+}
+
+.fa-instagram {
+    background: #E1306C;
+    background: linear-gradient(45DEG, #405DE6, #5851DB, #833AB4, #C13584, #E1306C, #FD1D1D);
+    color: white;
+} 
 
 @media (max-width: 767px) {
     .btn-search {
