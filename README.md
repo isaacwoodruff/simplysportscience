@@ -54,19 +54,36 @@ The target audiences for this website are:
 
 ### Employer Goals
 The goals of employers on the website are to:
-- Gain good exposure to the right candidates
+- Have access to a platform that connects employers and candidates in the sport science community
 - Find a selection of quality candidates for job openings in their organisation
-- Have a dashboard to easily manage all of their job posts
 
 ### Candidate Goals
 The goals of candidates on the website are to:
 - Easily find the jobs they want in the area of sport science
-- Quickly apply to jobs
-- Get alerts when new jobs get posted
+- Connect with employers
 
 ## User Stories
+### Employer User Stories
+A employer using [Simply Sport Science](https://simplysportscience.herokuapp.com/) expects to:
+- Be able to register, login, and logout
+- Have their own profile which they can create, read, update or delete
+- Create job posts
+- Easily and securely pay for publishing job posts
+
+### Candidate User Stories
+A candidate using [Simply Sport Science](https://simplysportscience.herokuapp.com/) expects to:
+- Be able to register, login, and logout
+- Have their own profile which they can create, read, update or delete
+- View jobs from employers
+- Easily search through jobs by job title, location, and employment type
+- Have access to contact information for the employers on each job
 
 ## Design Choices
+Simply Sport Science was designed to look professional and minimalistic:
+- It utilises office/desk/business setting images for backgrounds and banners
+- Only two fonts were chosen to keep the design familiar to the user throughtout the site
+- Only a handful of icons were used to convey visual communication to the user *e.g search inputs, breadcrumbs*
+- A light shade of blue was mainly used for buttons because it is known in color psychology for signifying reliability, responsibility, and dependability. It is a professional color
 
 ## Wireframes
 The following wireframes were designed with Balsamiq.
