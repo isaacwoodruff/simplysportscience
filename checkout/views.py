@@ -24,6 +24,7 @@ def checkout_view(request):
         payment_method_types=['card'],
         line_items=[{
             'name': 'Job Post',
+            'description': 'One job post',
             'amount': 10000,
             'currency': 'eur',
             'quantity': 1,
