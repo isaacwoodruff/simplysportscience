@@ -15,7 +15,10 @@
             {{ profile_form | crispy }}
             <div class="d-flex justify-content-between">
                 <button class="btn btn-info" type="submit">Update</button>
-                <a class="btn btn-danger" href="{% url 'delete_user_view' %}" type="submit">Delete</a>
+                <a class="btn btn-danger" href="{% url 'delete_user_view' %}" type="submit">Delete Profile</a>
+            </div>
+            <div class="text-right my-3">
+                <a class="btn btn-secondary" href="{% url 'password_reset' %}">Reset your password</a>
             </div>
         </form>
     </div>
