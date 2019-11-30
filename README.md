@@ -103,7 +103,7 @@ Mobile View
 The User model for this project is the standard User model provided by Django.
 
 #### EmployerProfile Model
-Key in db | Validation | Field Type |
+Key | Validation | Field Type |
 --- | --- | ---
 user | User, on_delete=models.CASCADE | OneToOneField
 is_employer | default=True | BooleanField
@@ -113,7 +113,7 @@ credits | default=0 | IntegerField
 slug | blank=True, null=True | SlugField
 
 #### CandidateProfile Model
-Key in db | Validation | Field Type |
+Key | Validation | Field Type |
 --- | --- | ---
 user | User, on_delete=models.CASCADE | OneToOneField
 is_employer | default=True | BooleanField
@@ -122,7 +122,7 @@ first_name | max_length=100 | CharField
 last_name | max_length=100 | CharField
 
 #### Job Model
-Key in db | Validation | Field Type |
+Key | Validation | Field Type |
 --- | --- | ---
 title | max_length=200 | CharField
 employment_type | max_length=50, choices=EMPLOYMENT_TYPE_CHOICES, default=FULL_TIME | CharField
@@ -469,10 +469,20 @@ EMAIL_HOST_USER | `<your email address>`
 
 # Credits
 ### Content
+- The text for the job postings on the site was taken from [Careers In Sport](https://careers-in-sport.co.uk/)
+- All other content on the site was written by the developer.
 
 ### Media
+- The banner image in the job search pages uses an image from [this location](https://www.pexels.com/photo/photo-of-people-doing-fist-bump-3184430/?fbclid=IwAR38WzHnwwOuL2VcxFMn879hwp7a81MHEk9mYuYkB5Bzj4K0mRpSADZuUUA)
+- The background image for sign in/sign up pages uses an image from [this location](https://www.pexels.com/photo/woman-writing-on-a-notebook-beside-teacup-and-tablet-computer-733856/?fbclid=IwAR1O-2oPVI040el3QIC9nsV3SAqNAidZxRPIBkTcR-FGBJmIGj_ftF5I3d4)
+- The favicon for this site is take from [Flaticon](https://www.flaticon.com/free-icon/gym_755298)
 
 ### Code
+- Code for in the @receiver function for the user profiles was modified from a blog post by [SimpleIsBetterThanComplex](https://simpleisbetterthancomplex.com/tutorial/2016/11/23/how-to-add-user-profile-to-django-admin.html)
+- The [William Vincent](https://wsvincent.com/django-slug-tutorial/) helped me understand how to use slugs with absolute urls
+- The CSS gradient for the instagram icon was taken from [Brand Gradients](http://www.brandgradients.com/instagram-colors/)
 
 ### Acknowledgements
+- [Corey Schafers] youtube [Django Tutorials](https://www.youtube.com/playlist?list=PL-osiE80TeTtoQCKZ03TU5fNfx2UY6U4p) helped me a lot in my understanding of Django.
 - Thanks to [Aaron Sinnott](https://github.com/aaronsnig501) for his help and suggestions throughout the project
+- [SlackOverflow](https://stackoverflow.com/) was invaluable for understanding issues and bugs throughout the development of the project
