@@ -83,7 +83,8 @@ footer {
 }
 
 .job-post {
-    box-shadow: 0 2px 2px -2px #807f7f;
+    -webkit-box-shadow: 0 2px 2px -2px #807f7f;
+            box-shadow: 0 2px 2px -2px #807f7f;
     padding: 20px 0;
     margin: 0 auto;
 }
@@ -158,6 +159,8 @@ footer {
 
 .fa-instagram {
     background: #E1306C;
+    background: -webkit-gradient(linear, left top, left bottom, from(45DEG), color-stop(#405DE6), color-stop(#5851DB), color-stop(#833AB4), color-stop(#C13584), color-stop(#E1306C), to(#FD1D1D));
+    background: -o-linear-gradient(45DEG, #405DE6, #5851DB, #833AB4, #C13584, #E1306C, #FD1D1D);
     background: linear-gradient(45DEG, #405DE6, #5851DB, #833AB4, #C13584, #E1306C, #FD1D1D);
     color: white;
 } 
