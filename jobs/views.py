@@ -9,11 +9,11 @@ from .models import Job
 from .forms import JobPostForm
 
 
-def job_details(request, PK, slug=""):
+def job_details(request, pk, slug=""):
     '''
     Renders details of a specific job post
     '''
-    post = get_object_or_404(Job, pk=PK)
+    post = get_object_or_404(Job, pk=pk)
 
     context = {
         "page_title": post.title,
