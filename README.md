@@ -89,10 +89,14 @@ Simply Sport Science was designed to look professional and minimalistic:
 The following wireframes were designed with Balsamiq.
 
 Desktop View
-- [Jobs Search Page](https://ibb.co/bvJbY9G)
+- [Jobs Search Page](https://ibb.co/GRSb6Hx)
+- [Employer/Candidates Page](https://ibb.co/YQXxyNS)
+- [New Job Page](https://ibb.co/HhVC42P)
+- [Job Details Page](https://ibb.co/qjDCvGp)
+- [Profile Page](https://ibb.co/2q1grSB)
 
 Mobile View
-- [Jobs Search Page](https://ibb.co/hdb58TG)
+- [Jobs Search Page](https://ibb.co/jWjb0bX)
 
 # Information Architecture
 - During the develoment phase of the project a SQlite3 database was used. This is the default that Django uses for local development.
