@@ -5,6 +5,7 @@ from users import forms as user_forms
 from django.contrib.auth.models import User
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth import authenticate, login
+from django.template.defaultfilters import slugify
 
 
 '''
@@ -32,6 +33,7 @@ def register_employer(request):
             else:
                 form_obj = form.save(commit=False)
                 form_obj.username = form.cleaned_data.get("email")
+                form_obj.slug = slugify(form.cleaned_data.get("company_name"))
                 form_obj.save()
 
                 profile = User.objects.filter(
