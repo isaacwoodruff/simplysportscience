@@ -1,29 +1,29 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from users import forms as user_forms
 from django.contrib.auth.models import User
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth import authenticate, login
 from django.template.defaultfilters import slugify
+from users import forms as user_forms
 
 
-'''
-If the form is valid on submition a query is made to check if the email/username
-exists. If it does then a warning message is sent and the form isn't saved.
-
-The employer registration view takes the forms value of the email field
-and assigns it to the hidden username field.
-
-After the User is created, a query is made to get the EmployerProfile object
-from the database. Then the information for this model is assigned and saved.
-
-The new_user is then authenticated and logged in with the form data and
-redirected to a view that routes it to their new profile.
-
-The registration form is just rendered if the request method is not POST
-'''
 def register_employer(request):
+    '''
+    If the form is valid on submition a query is made to check if the email/username
+    exists. If it does then a warning message is sent and the form isn't saved.
+
+    The employer registration view takes the forms value of the email field
+    and assigns it to the hidden username field.
+
+    After the User is created, a query is made to get the EmployerProfile object
+    from the database. Then the information for this model is assigned and saved.
+
+    The new_user is then authenticated and logged in with the form data and
+    redirected to a view that routes it to their new profile.
+
+    The registration form is just rendered if the request method is not POST
+    '''
     if request.method == "POST":
         form = user_forms.EmployerRegistrationForm(request.POST)
         if form.is_valid():
@@ -60,11 +60,11 @@ def register_employer(request):
     return render(request, "register.html", context)
 
 
-'''
-The candidate registration view is the same as the employer registration view except
-the forms are different and the CandidateProfile fields that are saved are different.
-'''
 def register_candidate(request):
+    '''
+    The candidate registration view is the same as the employer registration view except
+    the forms are different and the CandidateProfile fields that are saved are different.
+    '''
     if request.method == "POST":
         form = user_forms.CandidateRegistrationForm(request.POST)
         if form.is_valid():
@@ -101,12 +101,12 @@ def register_candidate(request):
     return render(request, "register.html", context)
 
 
-'''
-When the LoginForm is submitted and validated the user is authenticated.
-If they are authenticated then they are logged in and redirected to a 
-view that routes them to their specific profile (Employer/Candidate)
-'''
 def login_view(request):
+    '''
+    When the LoginForm is submitted and validated the user is authenticated.
+    If they are authenticated then they are logged in and redirected to a 
+    view that routes them to their specific profile (Employer/Candidate)
+    '''
     if request.method == "POST":
         form = user_forms.LoginForm(request.POST)
         if form.is_valid():
@@ -129,16 +129,16 @@ def login_view(request):
     return render(request, "login.html", context)
 
 
-'''
-This view is used to route the logged in User to their specific profile.
-It trys to access the EmployerProfile of a logged in User. If they dont
-exist then the User is a CandidateProfile and the view name is assinged 
-to the user_type. If they exist then the User is an EmployerProfile and
-the view name is assinged to the user_type. Then a redirect is called
-with the user_type.
-'''
 @login_required
 def logged_user_type(request):
+    '''
+    This view is used to route the logged in User to their specific profile.
+    It trys to access the EmployerProfile of a logged in User. If they dont
+    exist then the User is a CandidateProfile and the view name is assigned
+    to the user_type. If they exist then the User is an EmployerProfile and
+    the view name is assinged to the user_type. Then a redirect is called
+    with the user_type.
+    '''
     try:
         request.user.employerprofile
     except ObjectDoesNotExist:
@@ -149,16 +149,16 @@ def logged_user_type(request):
     return redirect(user_type)
 
 
-'''
-Checks to see if the User is an Employer. If they are not then it
-redirects to the candidate_profile view.
-
-If they are an employer it renders 2 forms to update the User and
-EmployerProfile objects. The username field is assigned the value
-of the email field automatically.
-'''
 @login_required
 def employer_profile(request):
+    '''
+    Checks to see if the User is an Employer. If they are not then it
+    redirects to the candidate_profile view.
+
+    If they are an employer it renders 2 forms to update the User and
+    EmployerProfile objects. The username field is assigned the value
+    of the email field automatically.
+    '''
     try:
         request.user.employerprofile
     except ObjectDoesNotExist:
@@ -196,13 +196,13 @@ def employer_profile(request):
     return render(request, "profile.html", context)
 
 
-'''
-The candidate_profile view is the same as employer_profile view except the
-forms are different. This view only updates the User object because the
-CandidateProfile doesnt have any information that the user should change.
-'''
 @login_required
 def candidate_profile(request):
+    '''
+    The candidate_profile view is the same as employer_profile view except the
+    forms are different. This view only updates the User object because the
+    CandidateProfile doesnt have any information that the user should change.
+    '''
     try:
         request.user.candidateprofile
     except ObjectDoesNotExist:
@@ -250,6 +250,9 @@ def candidates_page(request):
 
 
 def delete_user_view(request):
+    '''
+    Authenticates the user for confirmation to delete their profile
+    '''
     if request.method == "POST":
         form = user_forms.LoginForm(request.POST)
         if form.is_valid():

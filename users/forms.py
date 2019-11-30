@@ -4,13 +4,11 @@ from django.contrib.auth.forms import UserCreationForm
 from .models import EmployerProfile
 
 
-'''
-The Employer and Candidate registration forms hide the username field. These are then
-filled in the view with the email of the user.
-'''
-
-
 class EmployerRegistrationForm(UserCreationForm):
+    '''
+    The Employer and Candidate registration forms hide the username field. These are then
+    filled in the view with the email of the user.
+    '''
     email = forms.EmailField()
     company_name = forms.CharField(max_length=200)
     username = forms.EmailField(required=False)

@@ -4,17 +4,16 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.template.defaultfilters import slugify
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
 from .models import Job
 from .forms import JobPostForm
-from django.contrib.auth.models import User
-
-'''
-Renders details of a specific job post
-'''
 
 
-def job_details(request, pk, slug=""):
-    post = get_object_or_404(Job, pk=pk)
+def job_details(request, PK, slug=""):
+    '''
+    Renders details of a specific job post
+    '''
+    post = get_object_or_404(Job, pk=PK)
 
     context = {
         "page_title": post.title,
@@ -23,15 +22,15 @@ def job_details(request, pk, slug=""):
     return render(request, "job-details.html", context)
 
 
-'''
-If an employer has credits this creates a new job post.
-Assigns the hidden form field 'employer' the company_name of the current user.
-Creates a slug for the hidden slug field from the form title.
-After saving it finds the new job post in the database and redirects to it.
-Algolia keys are for the Algolia API location autofill field in the form
-'''
 @login_required
 def new_job(request):
+    '''
+    If an employer has credits this creates a new job post.
+    Assigns the hidden form field 'employer' the company_name of the current user.
+    Creates a slug for the hidden slug field from the form title.
+    After saving it finds the new job post in the database and redirects to it.
+    Algolia keys are for the Algolia API location autofill field in the form
+    '''
     if request.method == "POST":
         form = JobPostForm(request.POST)
         profile = request.user.employerprofile

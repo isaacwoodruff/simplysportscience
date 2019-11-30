@@ -4,8 +4,8 @@ import operator
 from functools import reduce
 from django.shortcuts import render, get_object_or_404, HttpResponse
 from django.db.models import Q
-from jobs.models import Job, EmployerProfile
 from django.core.paginator import Paginator
+from jobs.models import Job, EmployerProfile
 
 
 '''
@@ -15,10 +15,10 @@ ALGOLIA_PUBLIC_KEY = os.environ.get('ALGOLIA_PUBLIC_KEY')
 ALGOLIA_PUBLIC_APP_ID = os.environ.get('ALGOLIA_PUBLIC_APP_ID')
 
 
-'''
-Querys all the job posts and renders them paginated by 10 posts per page
-'''
 def job_list(request):
+    '''
+    Querys all the job posts and renders them paginated by 10 posts per page
+    '''
     job_posts = Job.objects.all()
     paginator = Paginator(job_posts, 10)
     page = request.GET.get('page')
@@ -33,10 +33,10 @@ def job_list(request):
     return render(request, "job-list.html", context)
 
 
-'''
-Gets all employer jobs or 404 and renders them paginated by 10 posts per page
-'''
 def employer_job_list(request, pk, slug=""):
+    '''
+    Gets all employer jobs or 404 and renders them paginated by 10 posts per page
+    '''
     employer_object = get_object_or_404(EmployerProfile, pk=pk)
 
     page_title = employer_object.company_name + " " + "Jobs"
@@ -55,11 +55,11 @@ def employer_job_list(request, pk, slug=""):
     return render(request, "job-list.html", context)
 
 
-'''
-Gets employment_type from GET request and querys all jobs with that employment_type
-an renders them paginated by 10 posts per page
-'''
 def employment_type_job_list(request):
+    '''
+    Gets employment_type from GET request and querys all jobs with that employment_type
+    an renders them paginated by 10 posts per page
+    '''
     employment_type = request.GET.get('type')
     page_title = employment_type + " Jobs"
 
@@ -77,11 +77,11 @@ def employment_type_job_list(request):
     return render(request, "job-list.html", context)
 
 
-'''
-Gets location from GET request and querys all jobs with that location
-an renders them paginated by 10 posts per page
-'''
 def location_job_list(request):
+    '''
+    Gets location from GET request and querys all jobs with that location
+    an renders them paginated by 10 posts per page
+    '''
     location = request.GET['in']
     page_title = "Jobs in " + location
 
@@ -99,11 +99,11 @@ def location_job_list(request):
     return render(request, "job-list.html", context)
 
 
-'''
-Finds all jobs in database by what user is typing and sends json data to suggest
-an autocomplete for job title search. The set() method removes duplicates.
-'''
 def autocomplete_title_search(request):
+    '''
+    Finds all jobs in database by what user is typing and sends json data to suggest
+    an autocomplete for job title search. The set() method removes duplicates.
+    '''
     if request.is_ajax():
         job_query = request.GET.get('term', '')
         titles = Job.objects.filter(
@@ -119,22 +119,22 @@ def autocomplete_title_search(request):
     return HttpResponse(data, mimetype)
 
 
-'''
-Takes job-title, location, and employment_type from GET request.
-
-Puts job-title and location into form_data to fill search bar fields with previous search.
-
-Three if statements check to see if the search fields contain any values, if they do then
-a query of that search value is appended onto the query_list.
-
-If the query_list is empty then it searches the database for all jobs.
-If the query_list is not empty a reduce method gets every value in the query_list
-and adds a | (and) operator onto it. This inside the filter method, allows a dynamic/variable
-search query to find jobs from the search bar fields.
-
-These are then rendered and paginated by 10 posts per page.
-'''
 def search_results(request):
+    '''
+    Takes job-title, location, and employment_type from GET request.
+
+    Puts job-title and location into form_data to fill search bar fields with previous search.
+
+    Three if statements check to see if the search fields contain any values, if they do then
+    a query of that search value is appended onto the query_list.
+
+    If the query_list is empty then it searches the database for all jobs.
+    If the query_list is not empty a reduce method gets every value in the query_list
+    and adds a | (and) operator onto it. This inside the filter method, allows a dynamic/variable
+    search query to find jobs from the search bar fields.
+
+    These are then rendered and paginated by 10 posts per page.
+    '''
     job_query = request.GET.get('job-title')
     location_query = request.GET.get('location')
     employment_type_query = request.GET.getlist('employment-type')
