@@ -1,3 +1,8 @@
+# ! THIS IS THE OLD VERSION !
+This version uses some old APIs that are unfortunetly no longer supported. This version is left here to demonstrate the rapid development of a project of this scope by the developer.
+
+Please find the new version [here](https://github.com/isaacwoodruff/simplysportscience-v2). 
+
 # Simply Sport Science
 [Simply Sport Science](https://simplysportscience.herokuapp.com/) was created as a job board to connect employers and candidates in the area of sport science.
 
